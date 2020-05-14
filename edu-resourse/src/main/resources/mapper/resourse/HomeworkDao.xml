@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hebin.edu.resourse.dao.HomeworkDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.hebin.edu.resourse.entity.HomeworkEntity" id="homeworkMap">
+        <result property="homeworkId" column="homework_id"/>
+        <result property="qaTitle" column="qa_title"/>
+        <result property="homeworkContent" column="homework_content"/>
+        <result property="addFile" column="add_file"/>
+    </resultMap>
+
+
+</mapper>

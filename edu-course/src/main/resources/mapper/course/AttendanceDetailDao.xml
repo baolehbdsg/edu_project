@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hebin.edu.course.dao.AttendanceDetailDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.hebin.edu.course.entity.AttendanceDetailEntity" id="attendanceDetailMap">
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="attendanceid" column="attendanceId"/>
+        <result property="recordTime" column="record_time"/>
+        <result property="isRecord" column="is_record"/>
+    </resultMap>
+
+
+</mapper>

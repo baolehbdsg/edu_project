@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: lesson-service
+  cloud:
+    nacos:
+      config:
+        server-addr:  192.168.56.1:8848
+        namespace:  e44cc2c8-04ac-4d56-b00c-9a1959152d13
+        group: lesson-service
+        file-extension: yml  # 默认找服务名.properties文件

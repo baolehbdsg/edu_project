@@ -12,6 +12,7 @@
     <modules>
         <module>edu-core</module>
         <module>edu-admin</module>
+        <module>student</module>
     </modules>
 
 </project>
