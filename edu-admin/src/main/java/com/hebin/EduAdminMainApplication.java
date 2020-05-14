@@ -7,10 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @SpringBootApplication
-public class GmallAdminMainApplication {
+public class EduAdminMainApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(GmallAdminMainApplication.class, args);
+        SpringApplication.run(EduAdminMainApplication.class, args);
     }
 
 }
