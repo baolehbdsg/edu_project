@@ -1,12 +1,4 @@
-/*
- * Copyright (c) 2020. edu_project. 
- *
- * 作者：何彬. 
- *
- * 版权所有，侵权必究. 
- */
-
-package com.hebin.course.entity;
+package com.hebin.resourse.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -17,16 +9,16 @@ import java.util.Date;
 import lombok.Data;
 
 /**
- * 课程测试
+ * 测试
  * 
  * @author hebin
- * @email 649980884@@qq.com
- * @date 2020-05-13 19:55:25
+ * @email 649980884@qq.com
+ * @date 2020-05-15 14:40:29
  */
 @ApiModel
 @Data
-@TableName("edu_course_test")
-public class CourseTestEntity implements Serializable {
+@TableName("edu_test_entity")
+public class TestEntityEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**

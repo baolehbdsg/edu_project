@@ -1,11 +1,3 @@
-/*
- * Copyright (c) 2020. edu_project.
- *
- * 作者：何彬.
- *
- * 版权所有，侵权必究.
- */
-
 package com.hebin.resourse.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -20,8 +12,8 @@ import lombok.Data;
  * 
  * 
  * @author hebin
- * @email 649980884@@qq.com
- * @date 2020-05-13 19:52:44
+ * @email 649980884@qq.com
+ * @date 2020-05-15 14:40:29
  */
 @ApiModel
 @Data

@@ -1,26 +1,17 @@
-/*
- * Copyright (c) 2020. edu_project.
- *
- * 作者：何彬.
- *
- * 版权所有，侵权必究.
- */
-
 package com.hebin.resourse.controller;
 
 import java.util.Arrays;
+import java.util.Map;
 
 
-import com.hebin.resourse.entity.VoteEntity;
-import com.hebin.core.bean.PageVo;
-import com.hebin.core.bean.QueryCondition;
-import com.hebin.core.bean.Resp;
+import com.hebin.core.bean.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import com.hebin.resourse.entity.VoteEntity;
 import com.hebin.resourse.service.VoteService;
 
 
@@ -30,8 +21,8 @@ import com.hebin.resourse.service.VoteService;
  * ͶƱ
  *
  * @author hebin
- * @email 649980884@@qq.com
- * @date 2020-05-13 19:52:44
+ * @email 649980884@qq.com
+ * @date 2020-05-15 14:40:29
  */
 @Api(tags = "ͶƱ 管理")
 @RestController

@@ -1,23 +1,15 @@
-/*
- * Copyright (c) 2020. edu_project.
- *
- * 作者：何彬.
- *
- * 版权所有，侵权必究.
- */
-
 package com.hebin.resourse.service.impl;
+
+import org.springframework.stereotype.Service;
+import java.util.Map;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.hebin.core.bean.*;
 
 import com.hebin.resourse.dao.QuestionsAndAnswersDao;
 import com.hebin.resourse.entity.QuestionsAndAnswersEntity;
 import com.hebin.resourse.service.QuestionsAndAnswersService;
-import org.springframework.stereotype.Service;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.hebin.core.bean.PageVo;
-import com.hebin.core.bean.Query;
-import com.hebin.core.bean.QueryCondition;
 
 
 @Service("questionsAndAnswersService")
