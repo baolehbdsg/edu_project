@@ -26,7 +26,7 @@ import com.hebin.resourse.service.QuestionsAndAnswersService;
  * @email 649980884@qq.com
  * @date 2020-05-15 14:40:29
  */
-@Api(tags = " 管理")
+@Api(tags = "问答题 管理")
 @RestController
 @RequestMapping("resourse/questionsandanswers")
 public class QuestionsAndAnswersController {

@@ -24,7 +24,7 @@ import com.hebin.resourse.service.TestChoiceService;
  * @email 649980884@qq.com
  * @date 2020-05-15 14:40:29
  */
-@Api(tags = " 管理")
+@Api(tags = "测试中的选择题 管理")
 @RestController
 @RequestMapping("resourse/testchoice")
 public class TestChoiceController {

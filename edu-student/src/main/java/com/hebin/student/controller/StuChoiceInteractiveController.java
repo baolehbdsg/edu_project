@@ -32,7 +32,7 @@ import com.hebin.student.service.StuChoiceInteractiveService;
  * @email 649980884@@qq.com
  * @date 2020-05-13 19:51:01
  */
-@Api(tags = "学生互动选择 管理")
+@Api(tags = "学生互动选择题作答情况")
 @RestController
 @RequestMapping("student/stuchoiceinteractive")
 public class StuChoiceInteractiveController {

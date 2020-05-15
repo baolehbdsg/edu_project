@@ -33,7 +33,7 @@ import com.hebin.student.service.StuCommitHomeworkService;
  * @email 649980884@@qq.com
  * @date 2020-05-13 19:51:01
  */
-@Api(tags = "学生与作业 管理")
+@Api(tags = "学生作业情况")
 @RestController
 @RequestMapping("student/stucommithomework")
 public class StuCommitHomeworkController {

@@ -33,7 +33,7 @@ import com.hebin.student.service.StuTestQaService;
  * @email 649980884@@qq.com
  * @date 2020-05-13 19:51:00
  */
-@Api(tags = "简答题作答情况 管理")
+@Api(tags = "学生测试简答题作答情况 管理")
 @RestController
 @RequestMapping("student/stutestqa")
 public class StuTestQaController {

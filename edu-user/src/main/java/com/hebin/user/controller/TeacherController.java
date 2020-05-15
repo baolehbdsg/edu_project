@@ -33,7 +33,7 @@ import com.hebin.user.service.TeacherService;
  * @email 649980884@@qq.com
  * @date 2020-05-13 19:48:49
  */
-@Api(tags = " 管理")
+@Api(tags = "教师用户 管理")
 @RestController
 @RequestMapping("user/teacher")
 public class TeacherController {

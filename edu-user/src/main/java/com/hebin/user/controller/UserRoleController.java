@@ -33,7 +33,7 @@ import com.hebin.user.service.UserRoleService;
  * @email 649980884@@qq.com
  * @date 2020-05-13 19:48:49
  */
-@Api(tags = " 管理")
+@Api(tags = "用户角色")
 @RestController
 @RequestMapping("user/userrole")
 public class UserRoleController {

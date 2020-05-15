@@ -26,7 +26,7 @@ import com.hebin.resourse.service.InteractiveChoiceService;
  * @email 649980884@qq.com
  * @date 2020-05-15 14:40:29
  */
-@Api(tags = " 管理")
+@Api(tags = "选择与互动关系 管理")
 @RestController
 @RequestMapping("resourse/interactivechoice")
 public class InteractiveChoiceController {

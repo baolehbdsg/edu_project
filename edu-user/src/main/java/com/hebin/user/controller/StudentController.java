@@ -15,6 +15,8 @@ import com.hebin.user.entity.StudentEntity;
 import com.hebin.core.bean.PageVo;
 import com.hebin.core.bean.QueryCondition;
 import com.hebin.core.bean.Resp;
+import com.hebin.user.service.RoleService;
+import com.hebin.user.service.UserRoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +35,7 @@ import com.hebin.user.service.StudentService;
  * @email 649980884@@qq.com
  * @date 2020-05-13 19:48:49
  */
-@Api(tags = "ѧ 管理")
+@Api(tags = "学生用户 管理")
 @RestController
 @RequestMapping("user/student")
 public class StudentController {
@@ -73,6 +75,7 @@ public class StudentController {
     @PreAuthorize("hasAuthority('user:student:save')")
     public Resp<Object> save(@RequestBody StudentEntity student){
 		studentService.save(student);
+
 
         return Resp.ok(null);
     }

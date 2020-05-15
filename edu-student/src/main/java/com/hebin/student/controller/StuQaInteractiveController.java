@@ -33,7 +33,7 @@ import com.hebin.student.service.StuQaInteractiveService;
  * @email 649980884@@qq.com
  * @date 2020-05-13 19:51:01
  */
-@Api(tags = "学生互动简答 管理")
+@Api(tags = "学生互动简答作答情况")
 @RestController
 @RequestMapping("student/stuqainteractive")
 public class StuQaInteractiveController {

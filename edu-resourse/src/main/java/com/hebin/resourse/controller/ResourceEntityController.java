@@ -25,7 +25,7 @@ import com.hebin.resourse.service.ResourceEntityService;
  * @email 649980884@qq.com
  * @date 2020-05-15 14:40:30
  */
-@Api(tags = " 管理")
+@Api(tags = "资源实体 管理")
 @RestController
 @RequestMapping("resourse/resourceentity")
 public class ResourceEntityController {

@@ -33,7 +33,7 @@ import com.hebin.user.service.AdminService;
  * @email 649980884@@qq.com
  * @date 2020-05-13 19:48:49
  */
-@Api(tags = " 管理")
+@Api(tags = "管理员")
 @RestController
 @RequestMapping("user/admin")
 public class AdminController {

@@ -24,7 +24,7 @@ import com.hebin.resourse.service.TestQaService;
  * @email 649980884@qq.com
  * @date 2020-05-15 14:40:29
  */
-@Api(tags = " 管理")
+@Api(tags = "测试与问答 管理")
 @RestController
 @RequestMapping("resourse/testqa")
 public class TestQaController {

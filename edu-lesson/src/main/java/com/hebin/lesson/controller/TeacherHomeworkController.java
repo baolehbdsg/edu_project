@@ -33,7 +33,7 @@ import com.hebin.lesson.service.TeacherHomeworkService;
  * @email 649980884@@qq.com
  * @date 2020-05-13 19:53:54
  */
-@Api(tags = " 管理")
+@Api(tags = "教师与作业 管理")
 @RestController
 @RequestMapping("lesson/teacherhomework")
 public class TeacherHomeworkController {
