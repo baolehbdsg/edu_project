@@ -33,7 +33,7 @@ import com.hebin.bbs.service.MainInvitationService;
  * @email 649980884@@qq.com
  * @date 2020-05-13 14:24:50
  */
-@Api(tags = " 管理")
+@Api(tags = "主贴 管理")
 @RestController
 @RequestMapping("bbs/maininvitation")
 public class MainInvitationController {

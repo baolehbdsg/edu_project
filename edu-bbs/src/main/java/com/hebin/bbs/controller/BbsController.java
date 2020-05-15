@@ -22,18 +22,14 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.hebin.bbs.service.BbsService;
-
-
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
 /**
- * 
- *
  * @author hebin
  * @email 649980884@@qq.com
- * @date 2020-05-13 14:24:50
  */
-@Api(tags = " 管理")
+@Api(tags = "论坛 管理")
 @RestController
 @RequestMapping("bbs/bbs")
 public class BbsController {

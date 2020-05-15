@@ -22,8 +22,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.hebin.bbs.service.BbsReplyService;
-
-
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
 /**
@@ -33,8 +32,9 @@ import com.hebin.bbs.service.BbsReplyService;
  * @email 649980884@@qq.com
  * @date 2020-05-13 14:24:50
  */
-@Api(tags = " 管理")
+@Api(tags = "回复 管理")
 @RestController
+@EnableSwagger2
 @RequestMapping("bbs/bbsreply")
 public class BbsReplyController {
     @Autowired
