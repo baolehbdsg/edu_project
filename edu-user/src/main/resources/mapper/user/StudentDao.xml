@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.hebin.edu.user.dao.StudentDao">
+<mapper namespace="com.hebin.user.dao.StudentDao">
 
 	<!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="com.hebin.edu.user.entity.StudentEntity" id="studentMap">
+    <resultMap type="com.hebin.user.entity.StudentEntity" id="studentMap">
         <result property="userId" column="user_id"/>
         <result property="userName" column="user_name"/>
         <result property="userGender" column="user_gender"/>

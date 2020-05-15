@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.hebin.edu.lesson.dao.TeacherInteractiveDao">
+<mapper namespace="com.hebin.lesson.dao.TeacherInteractiveDao">
 
 	<!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="com.hebin.edu.lesson.entity.TeacherInteractiveEntity" id="teacherInteractiveMap">
+    <resultMap type="com.hebin.lesson.entity.TeacherInteractiveEntity" id="teacherInteractiveMap">
         <result property="id" column="id"/>
         <result property="userId" column="user_id"/>
         <result property="interactiveId" column="interactive_id"/>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.hebin.edu.bbs.dao.BbsDao">
+<mapper namespace="com.hebin.bbs.dao.BbsDao">
 
 	<!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="com.hebin.edu.bbs.entity.BbsEntity" id="bbsMap">
+    <resultMap type="com.hebin.bbs.entity.BbsEntity" id="bbsMap">
         <result property="bbsId" column="bbs_id"/>
         <result property="forumName" column="forum_name"/>
         <result property="numberOfInvitation" column="number_of_invitation"/>

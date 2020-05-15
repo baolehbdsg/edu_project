@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.hebin.edu.user.dao.UserRoleDao">
+<mapper namespace="com.hebin.user.dao.UserRoleDao">
 
 	<!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="com.hebin.edu.user.entity.UserRoleEntity" id="userRoleMap">
+    <resultMap type="com.hebin.user.entity.UserRoleEntity" id="userRoleMap">
         <result property="userRoleId" column="user_role_id"/>
         <result property="userRoleUserid" column="user_role_userid"/>
         <result property="userRoleRole" column="user_role_role"/>

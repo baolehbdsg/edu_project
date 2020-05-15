@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.hebin.edu</groupId>
-    <artifactId>resourse</artifactId>
+    <artifactId>edu-resourse</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>resourse</name>
     <description>各种资源服务</description>
