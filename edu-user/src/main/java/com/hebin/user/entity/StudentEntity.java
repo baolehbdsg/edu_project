@@ -8,6 +8,7 @@
 
 package com.hebin.user.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
@@ -32,9 +33,9 @@ public class StudentEntity implements Serializable {
 	/**
 	 * 
 	 */
-	@TableId
 	@ApiModelProperty(name = "userId",value = "")
-	private Long userId;
+	@TableId(value = "user_id",type = IdType.ID_WORKER_STR )
+	private String userId;
 	/**
 	 * 
 	 */

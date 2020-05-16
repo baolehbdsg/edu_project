@@ -8,6 +8,7 @@
 
 package com.hebin.user.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
@@ -32,9 +33,10 @@ public class TeacherEntity implements Serializable {
 	/**
 	 * 
 	 */
-	@TableId
+
 	@ApiModelProperty(name = "userId",value = "")
-	private Long userId;
+	@TableId(value = "user_id",type = IdType.ID_WORKER_STR)
+	private String userId;
 	/**
 	 * 
 	 */
@@ -43,7 +45,7 @@ public class TeacherEntity implements Serializable {
 	/**
 	 * 
 	 */
-	@ApiModelProperty(name = "userGender",value = "")
+	@ApiModelProperty(name = "userGender",value = "0")
 	private Integer userGender;
 	/**
 	 * 
@@ -88,12 +90,12 @@ public class TeacherEntity implements Serializable {
 	/**
 	 * 
 	 */
-	@ApiModelProperty(name = "isDelete",value = "")
+	@ApiModelProperty(name = "isDelete",value = "0")
 	private Integer isDelete;
 	/**
 	 * 
 	 */
-	@ApiModelProperty(name = "isBanned",value = "")
+	@ApiModelProperty(name = "isBanned",value = "0")
 	private Integer isBanned;
 
 }
