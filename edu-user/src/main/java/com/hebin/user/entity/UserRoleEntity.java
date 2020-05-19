@@ -8,6 +8,7 @@
 
 package com.hebin.user.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
@@ -32,8 +33,9 @@ public class UserRoleEntity implements Serializable {
 	/**
 	 * 
 	 */
-	@TableId
+
 	@ApiModelProperty(name = "userRoleId",value = "")
+	@TableId(value = "user_id",type = IdType.AUTO)
 	private Long userRoleId;
 	/**
 	 * 

@@ -53,10 +53,20 @@ public class UserRegisterController {
         }
 
         studentService.save(student);
-//      UserRoleEntity userRoleEntity = new UserRoleEntity();
+        StudentEntity stu=studentService.getOne(qw);
+
+        //保存角色信息逻辑
+        //未来将使用springsecurity代替
+        UserRoleEntity userRoleEntity = new UserRoleEntity();
+        //设置用户角色
+        userRoleEntity.setUserRoleRole(1L);
+        //对应的用户id
+        userRoleEntity.setUserRoleUserid(Long.parseLong(stu.getUserId()));
+        userRoleService.save(userRoleEntity);
 
         return Resp.ok("注册成功");
     }
+
     @ApiOperation("教师用户注册")
     @PostMapping("/create/teacher")
     @PreAuthorize("hasAuthority('user:register:save')")
@@ -71,8 +81,17 @@ public class UserRegisterController {
         }
         //如果注册手机或者邮箱不存在
         teacherService.save(teacher);
-//      UserRoleEntity userRoleEntity = new UserRoleEntity();
 
+        TeacherEntity tea=teacherService.getOne(qw);
+
+        //保存角色信息逻辑
+        //未来将使用springsecurity代替
+        UserRoleEntity userRoleEntity = new UserRoleEntity();
+        //设置用户角色
+        userRoleEntity.setUserRoleRole(2L);
+        //对应的用户id
+        userRoleEntity.setUserRoleUserid(Long.parseLong(tea.getUserId()));
+        userRoleService.save(userRoleEntity);
         return Resp.ok("注册成功");
     }
 

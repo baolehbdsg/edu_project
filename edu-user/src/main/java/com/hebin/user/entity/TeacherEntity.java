@@ -10,6 +10,7 @@ package com.hebin.user.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -31,8 +32,11 @@ public class TeacherEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 
-	 */
+	 * 说明：
+	 * 教师用户注册给的id也必修是一个数值形式的字符串，或者空值
+	 * 否则会报错、
+	 * 报错处理--自定义异常
+	 * */
 
 	@ApiModelProperty(name = "userId",value = "")
 	@TableId(value = "user_id",type = IdType.ID_WORKER_STR)
@@ -90,6 +94,7 @@ public class TeacherEntity implements Serializable {
 	/**
 	 * 
 	 */
+	@TableLogic
 	@ApiModelProperty(name = "isDelete",value = "0")
 	private Integer isDelete;
 	/**

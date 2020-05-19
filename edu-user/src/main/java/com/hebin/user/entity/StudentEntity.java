@@ -29,9 +29,9 @@ import lombok.Data;
 @TableName("edu_student")
 public class StudentEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
-
 	/**
-	 * 
+	 * 说明：
+	 * 前端必须给一个空值或者为数值的字符串，不能是无法解析的字符串
 	 */
 	@ApiModelProperty(name = "userId",value = "")
 	@TableId(value = "user_id",type = IdType.ID_WORKER_STR )
