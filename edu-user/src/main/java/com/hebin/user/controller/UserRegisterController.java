@@ -10,22 +10,23 @@ package com.hebin.user.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.hebin.core.bean.PageVo;
-import com.hebin.core.bean.Query;
-import com.hebin.core.bean.QueryCondition;
 import com.hebin.core.bean.Resp;
 import com.hebin.user.entity.StudentEntity;
 import com.hebin.user.entity.TeacherEntity;
+import com.hebin.user.entity.UserEntity;
 import com.hebin.user.entity.UserRoleEntity;
-import com.hebin.user.service.RoleService;
 import com.hebin.user.service.StudentService;
 import com.hebin.user.service.TeacherService;
 import com.hebin.user.service.UserRoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 @Api(tags = "用户注册")
 @RestController
@@ -38,22 +39,55 @@ public class UserRegisterController {
     @Autowired
     private UserRoleService userRoleService;
 
-    @ApiOperation("学生用户注册")
-    @PostMapping("/create/student")
+    @ApiOperation("用户注册")
+    @PostMapping("/{userType}")
     @PreAuthorize("hasAuthority('user:register:save')")
-    public Resp<Object> saveStudent(@RequestBody StudentEntity student){
+    public Resp<Object> userRegister(@PathVariable Integer userType, @RequestBody UserEntity userEntity) throws Exception {
+        //先查一下看看是否注册过，没有注册过再往下走
+        //条件构造器
+        QueryWrapper<StudentEntity> qwStu = new QueryWrapper<>();
+        QueryWrapper<TeacherEntity> qwTea = new QueryWrapper<>();
+        //如果注册手机已经存在
+        StudentEntity student = new StudentEntity();
+        //属性值复制
+        BeanUtils.copyProperties(userEntity,student);
+        qwStu.eq("user_tel",student.getUserTel()).or().eq("user_mail",student.getUserMail());
+        TeacherEntity teacher = new TeacherEntity();
+        BeanUtils.copyProperties(userEntity,teacher);
+        qwTea.eq("user_tel",teacher.getUserTel()).or().eq("user_mail",teacher.getUserMail());
+        if(!studentService.list(qwStu).isEmpty()||!teacherService.list(qwTea).isEmpty())
+        {
+            return Resp.fail("用户已存在");
+        }
+        if(userType==0)
+        {
+            return saveStudent(student);
+        }
+        else
+        {
+            return saveTeacher(teacher);
+        }
+    }
+
+    public Resp<Object> saveStudent(StudentEntity student){
+        //预处理，对传入的Id部分进行预处理
+        if(student.getUserId()!="")
+        {
+            student.setUserId("");
+        }
         //条件构造器
         QueryWrapper<StudentEntity> qw = new QueryWrapper<>();
-        //如果注册手机已经存在
+        //用于重新获取用户id
         qw.eq("user_tel",student.getUserTel()).or().eq("user_mail",student.getUserMail());
 
-        if(!studentService.list(qw).isEmpty())
-        {
-            return Resp.fail("用户已经存在");
-        }
+//        if(!studentService.list(qw).isEmpty())
+//        {
+//            return Resp.fail("用户已经存在");
+//        }
 
         studentService.save(student);
         StudentEntity stu=studentService.getOne(qw);
+        System.out.println(stu);
 
         //保存角色信息逻辑
         //未来将使用springsecurity代替
@@ -67,23 +101,20 @@ public class UserRegisterController {
         return Resp.ok("注册成功");
     }
 
-    @ApiOperation("教师用户注册")
-    @PostMapping("/create/teacher")
-    @PreAuthorize("hasAuthority('user:register:save')")
-    public Resp<Object> saveTeacher(@RequestBody TeacherEntity teacher){
-        //条件构造器
-        QueryWrapper<TeacherEntity> qw = new QueryWrapper<>();
-        //如果注册手机已经存在
-        qw.eq("user_tel",teacher.getUserTel()).or().eq("user_mail",teacher.getUserMail());
-        if(!teacherService.list(qw).isEmpty())
+    public Resp<Object> saveTeacher(TeacherEntity teacher){
+        //数据预处理
+        if(teacher.getUserId()!="")
         {
-            return Resp.fail("用户已经存在");
+            teacher.setUserId("");
         }
-        //如果注册手机或者邮箱不存在
+        //条件构造器用于获取返回的id
+        QueryWrapper<TeacherEntity> qw = new QueryWrapper<>();
+
+        qw.eq("user_tel",teacher.getUserTel()).or().eq("user_mail",teacher.getUserMail());
+
         teacherService.save(teacher);
 
         TeacherEntity tea=teacherService.getOne(qw);
-
         //保存角色信息逻辑
         //未来将使用springsecurity代替
         UserRoleEntity userRoleEntity = new UserRoleEntity();
@@ -94,5 +125,7 @@ public class UserRegisterController {
         userRoleService.save(userRoleEntity);
         return Resp.ok("注册成功");
     }
+
+
 
 }

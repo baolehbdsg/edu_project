@@ -33,19 +33,18 @@ public class UserRoleEntity implements Serializable {
 	/**
 	 * 
 	 */
-
-	@ApiModelProperty(name = "userRoleId",value = "")
-	@TableId(value = "user_id",type = IdType.AUTO)
+	@ApiModelProperty(name = "userRoleId",value = "用户角色关联主键")
+	@TableId(value = "user_role_id",type = IdType.AUTO)
 	private Long userRoleId;
 	/**
 	 * 
 	 */
-	@ApiModelProperty(name = "userRoleUserid",value = "")
+	@ApiModelProperty(name = "userRoleUserid",value = "用户id")
 	private Long userRoleUserid;
 	/**
 	 * 
 	 */
-	@ApiModelProperty(name = "userRoleRole",value = "")
+	@ApiModelProperty(name = "userRoleRole",value = "角色id")
 	private Long userRoleRole;
 
 }

@@ -27,7 +27,7 @@ import lombok.Data;
 @ApiModel
 @Data
 @TableName("edu_student")
-public class StudentEntity implements Serializable {
+public class StudentEntity extends UserEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 	/**
 	 * 说明：

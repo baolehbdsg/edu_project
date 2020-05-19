@@ -32,7 +32,7 @@ public class RoleEntity implements Serializable {
 	/**
 	 * 
 	 */
-	@TableId
+	@TableId(value = "role_id")
 	@ApiModelProperty(name = "roleId",value = "")
 	private Integer roleId;
 	/**
