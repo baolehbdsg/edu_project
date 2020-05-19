@@ -45,7 +45,7 @@ public class UserLoginController {
         StudentEntity stu=studentService.getOne(qwStu);
         TeacherEntity tea=teacherService.getOne(qwTea);
         System.out.println(stu+"  "+tea);
-//        HttpSession session = null;
+//      未来将使用redis保存用户登录信息
        if(stu==null && tea == null)
        {
            return Resp.fail("用户不存在");
@@ -54,7 +54,7 @@ public class UserLoginController {
        {
            if(userPassword.equals(stu.getUserPassword()))
            {
-//                session.setAttribute("userInfo",userInfo);
+
                return Resp.ok("登录成功");
            }
            else

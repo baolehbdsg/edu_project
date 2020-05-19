@@ -75,19 +75,8 @@ public class UserRegisterController {
         {
             student.setUserId("");
         }
-        //条件构造器
-        QueryWrapper<StudentEntity> qw = new QueryWrapper<>();
-        //用于重新获取用户id
-        qw.eq("user_tel",student.getUserTel()).or().eq("user_mail",student.getUserMail());
-
-//        if(!studentService.list(qw).isEmpty())
-//        {
-//            return Resp.fail("用户已经存在");
-//        }
 
         studentService.save(student);
-        StudentEntity stu=studentService.getOne(qw);
-        System.out.println(stu);
 
         //保存角色信息逻辑
         //未来将使用springsecurity代替
@@ -95,7 +84,7 @@ public class UserRegisterController {
         //设置用户角色
         userRoleEntity.setUserRoleRole(1L);
         //对应的用户id
-        userRoleEntity.setUserRoleUserid(Long.parseLong(stu.getUserId()));
+        userRoleEntity.setUserRoleUserid(Long.parseLong(student.getUserId()));
         userRoleService.save(userRoleEntity);
 
         return Resp.ok("注册成功");
@@ -107,21 +96,16 @@ public class UserRegisterController {
         {
             teacher.setUserId("");
         }
-        //条件构造器用于获取返回的id
-        QueryWrapper<TeacherEntity> qw = new QueryWrapper<>();
-
-        qw.eq("user_tel",teacher.getUserTel()).or().eq("user_mail",teacher.getUserMail());
 
         teacherService.save(teacher);
 
-        TeacherEntity tea=teacherService.getOne(qw);
         //保存角色信息逻辑
         //未来将使用springsecurity代替
         UserRoleEntity userRoleEntity = new UserRoleEntity();
         //设置用户角色
         userRoleEntity.setUserRoleRole(2L);
         //对应的用户id
-        userRoleEntity.setUserRoleUserid(Long.parseLong(tea.getUserId()));
+        userRoleEntity.setUserRoleUserid(Long.parseLong(teacher.getUserId()));
         userRoleService.save(userRoleEntity);
         return Resp.ok("注册成功");
     }

@@ -6,6 +6,8 @@ import java.util.Map;
 
 import com.hebin.core.bean.*;
 
+import com.hebin.course.entity.CourseTeacherEntity;
+import com.hebin.course.service.CourseTeacherService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +33,8 @@ import com.hebin.course.service.CourseService;
 public class CourseController {
     @Autowired
     private CourseService courseService;
-
+    @Autowired
+    private CourseTeacherService courseTeacherService;
     /**
      * 列表
      */
@@ -60,12 +63,20 @@ public class CourseController {
     /**
      * 保存
      */
-    @ApiOperation("保存")
-    @PostMapping("/save")
+    @ApiOperation("创建课程")
+    @PostMapping("/create/course")
     @PreAuthorize("hasAuthority('course:course:save')")
-    public Resp<Object> save(@RequestBody CourseEntity course){
+    public Resp<Object> save(String teacherid,@RequestBody CourseEntity course){
+        //校验course的id值是否合法
+        if(course.getCourseId()!="")
+        {
+            course.setCourseId("");
+        }
 		courseService.save(course);
-
+        CourseTeacherEntity courseTeacherEntity = new CourseTeacherEntity();
+        courseTeacherEntity.setCourseId(Long.parseLong(course.getCourseId()));
+        courseTeacherEntity.setUserId(Long.parseLong(teacherid));
+        courseTeacherService.save(courseTeacherEntity);
         return Resp.ok(null);
     }
 
