@@ -25,4 +25,13 @@ public class CourseTeacherServiceImpl extends ServiceImpl<CourseTeacherDao, Cour
         return new PageVo(page);
     }
 
+    @Override
+    public PageVo getCourseList(QueryCondition params, String userId) {
+        IPage<CourseTeacherEntity> page =new Query<CourseTeacherEntity>().getPage(params) ;
+        QueryWrapper qw = new QueryWrapper();
+        qw.eq("user_id",Long.parseLong(userId));
+        baseMapper.selectPage(page,qw);
+        return new PageVo(page);
+    }
+
 }

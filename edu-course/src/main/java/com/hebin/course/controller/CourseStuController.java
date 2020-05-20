@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Map;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.hebin.core.bean.*;
 
 import io.swagger.annotations.Api;
@@ -19,13 +20,13 @@ import com.hebin.course.service.CourseStuService;
 
 
 /**
- * 学生参与课程
+ * 课程与学生
  *
  * @author hebin
  * @email 649980884@qq.com
  * @date 2020-05-15 15:13:14
  */
-@Api(tags = "学生参与课程 管理")
+@Api(tags = "课程与学生 管理")
 @RestController
 @RequestMapping("course/coursestu")
 public class CourseStuController {
@@ -33,46 +34,35 @@ public class CourseStuController {
     private CourseStuService courseStuService;
 
     /**
-     * 列表
+     * 学生查看已选课程信息
      */
-    @ApiOperation("分页查询(排序)")
-    @GetMapping("/list")
-    @PreAuthorize("hasAuthority('course:coursestu:list')")
-    public Resp<PageVo> list(QueryCondition queryCondition) {
-        PageVo page = courseStuService.queryPage(queryCondition);
-
-        return Resp.ok(page);
-    }
-
-
-    /**
-     * 信息
-     */
-    @ApiOperation("详情查询")
-    @GetMapping("/info/{id}")
+    @ApiOperation("学生查看已选课程信息")
+    @GetMapping("/liststucourseinfo/{userId}")
     @PreAuthorize("hasAuthority('course:coursestu:info')")
-    public Resp<CourseStuEntity> info(@PathVariable("id") Long id){
-		CourseStuEntity courseStu = courseStuService.getById(id);
+    public Resp<Object> info(QueryCondition queryCondition,@PathVariable("userId") String userId){
 
-        return Resp.ok(courseStu);
+        PageVo pageVo = courseStuService.getListStuCourseInfo(queryCondition,userId);
+        return Resp.ok(pageVo);
     }
 
     /**
-     * 保存
+     * 学生选课
      */
-    @ApiOperation("保存")
-    @PostMapping("/save")
+    @ApiOperation("学生选课")
+    @PostMapping("/elective")
     @PreAuthorize("hasAuthority('course:coursestu:save')")
-    public Resp<Object> save(@RequestBody CourseStuEntity courseStu){
-		courseStuService.save(courseStu);
-
-        return Resp.ok(null);
+    public Resp<Object> elective(String studentId,String courseId){
+        CourseStuEntity courseStuEntity = new CourseStuEntity();
+        courseStuEntity.setCourseId(Long.parseLong(courseId));
+        courseStuEntity.setUserId(Long.parseLong(studentId));
+		courseStuService.save(courseStuEntity);
+        return Resp.ok("success");
     }
 
     /**
-     * 修改
+     * 修改学生信息--
      */
-    @ApiOperation("修改")
+    @ApiOperation("修改学生信息")
     @PostMapping("/update")
     @PreAuthorize("hasAuthority('course:coursestu:update')")
     public Resp<Object> update(@RequestBody CourseStuEntity courseStu){
@@ -82,15 +72,31 @@ public class CourseStuController {
     }
 
     /**
-     * 删除
+     * 删除学生
      */
-    @ApiOperation("删除")
+    @ApiOperation("删除当前已选课学生")
     @PostMapping("/delete")
     @PreAuthorize("hasAuthority('course:coursestu:delete')")
     public Resp<Object> delete(@RequestBody Long[] ids){
-		courseStuService.removeByIds(Arrays.asList(ids));
+        QueryWrapper<CourseStuEntity> qw  = new QueryWrapper();
+        for(int i=0;i<ids.length;i++)
+        {
+            qw.eq("user_id",ids[i]);
+            courseStuService.remove(qw);
+        }
+        return Resp.ok("success");
+    }
+    /**
+     * 查询选课学生情况
+     */
+    @ApiOperation("查询选课学生情况")
+    @GetMapping("/electivestudent/{courseId}")
+    @PreAuthorize("hasAuthority('course:course:delete')")
+    public Resp<Object> electiveStudent(QueryCondition queryCondition,@PathVariable("courseId") String courseId){
 
-        return Resp.ok(null);
+        PageVo pageVo=courseStuService.getListCourseStu(queryCondition,courseId);
+
+        return Resp.ok(pageVo);
     }
 
 }

@@ -15,5 +15,6 @@ import com.hebin.core.bean.*;
 public interface CourseTeacherService extends IService<CourseTeacherEntity> {
 
     PageVo queryPage(QueryCondition params);
+    PageVo getCourseList(QueryCondition params,String userId);
 }
 

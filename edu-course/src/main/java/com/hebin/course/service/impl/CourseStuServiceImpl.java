@@ -25,4 +25,22 @@ public class CourseStuServiceImpl extends ServiceImpl<CourseStuDao, CourseStuEnt
         return new PageVo(page);
     }
 
+    @Override
+    public PageVo getListCourseStu(QueryCondition params, String courseId) {
+        IPage<CourseStuEntity> page =new Query<CourseStuEntity>().getPage(params);
+        QueryWrapper qw = new QueryWrapper();
+        qw.eq("course_id",courseId);
+        baseMapper.selectPage(page,qw);
+        return new PageVo(page);
+    }
+
+    @Override
+    public PageVo getListStuCourseInfo(QueryCondition params, String userId) {
+        IPage<CourseStuEntity> page =new Query<CourseStuEntity>().getPage(params);
+        QueryWrapper qw = new QueryWrapper();
+        qw.eq("user_id",userId);
+        baseMapper.selectPage(page,qw);
+        return new PageVo(page);
+    }
+
 }
