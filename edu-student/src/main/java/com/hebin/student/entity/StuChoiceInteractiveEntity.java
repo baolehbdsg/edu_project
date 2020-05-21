@@ -39,17 +39,17 @@ public class StuChoiceInteractiveEntity implements Serializable {
 	 * 
 	 */
 	@ApiModelProperty(name = "userId",value = "")
-	private Long userId;
+	private String userId;
 	/**
 	 * 
 	 */
 	@ApiModelProperty(name = "interactiveId",value = "")
-	private Long interactiveId;
+	private String interactiveId;
 	/**
 	 * 
 	 */
 	@ApiModelProperty(name = "choiceId",value = "")
-	private Long choiceId;
+	private String choiceId;
 	/**
 	 * 题号靠前端来控制
 	 */
@@ -59,7 +59,7 @@ public class StuChoiceInteractiveEntity implements Serializable {
 	 * 
 	 */
 	@ApiModelProperty(name = "学生互动选择题答案",value = "")
-	private String 学生互动选择题答案;
+	private String stuInteractiveChoiceAnswer;
 	/**
 	 * 
 	 */

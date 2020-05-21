@@ -1,5 +1,6 @@
 package com.hebin.course.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
@@ -24,18 +25,18 @@ public class CourseBbsEntity implements Serializable {
 	/**
 	 * 
 	 */
-	@TableId
+	@TableId(type = IdType.AUTO)
 	@ApiModelProperty(name = "cbId",value = "")
 	private Long cbId;
 	/**
 	 * 
 	 */
 	@ApiModelProperty(name = "cbCourse",value = "")
-	private Long cbCourse;
+	private String cbCourse;
 	/**
 	 * 
 	 */
 	@ApiModelProperty(name = "cbBbs",value = "")
-	private Long cbBbs;
+	private String cbBbs;
 
 }

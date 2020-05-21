@@ -13,11 +13,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
-@MapperScan(basePackages = "com.hebin.edu.course.dao")
 @RefreshScope
 @EnableDiscoveryClient
+@MapperScan(basePackages = "com.hebin.course.dao")
+@EnableFeignClients
 public class CourseApplication {
 
     public static void main(String[] args) {

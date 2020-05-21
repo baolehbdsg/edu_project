@@ -40,7 +40,7 @@ public class UserRoleEntity implements Serializable {
 	 * 
 	 */
 	@ApiModelProperty(name = "userRoleUserid",value = "用户id")
-	private Long userRoleUserid;
+	private String userRoleUserid;
 	/**
 	 * 
 	 */

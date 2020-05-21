@@ -9,8 +9,12 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hebin.core.bean.*;
 
+import com.hebin.course.VO.CourseVO;
+import com.hebin.course.entity.CourseBbsEntity;
 import com.hebin.course.entity.CourseStuEntity;
 import com.hebin.course.entity.CourseTeacherEntity;
+import com.hebin.course.feign.Bbsfeign;
+import com.hebin.course.service.CourseBbsService;
 import com.hebin.course.service.CourseStuService;
 import com.hebin.course.service.CourseTeacherService;
 import io.swagger.annotations.Api;
@@ -42,8 +46,6 @@ public class CourseController {
     private CourseService courseService;
     @Autowired
     private CourseTeacherService courseTeacherService;
-    @Autowired
-    private CourseStuService courseStuService;
     /**
      * 列表
      */
@@ -66,7 +68,7 @@ public class CourseController {
     @ApiOperation("获取课程详情")
     @GetMapping("/info/{courseId}")
     @PreAuthorize("hasAuthority('course:course:info')")
-    public Resp<CourseEntity> info(@PathVariable("courseId") Long courseId){
+    public Resp<CourseEntity> info(@PathVariable("courseId") String courseId){
 
 
 		CourseEntity course = courseService.getById(courseId);
@@ -80,21 +82,11 @@ public class CourseController {
     @ApiOperation("创建课程")
     @PostMapping("/create/course")
     @PreAuthorize("hasAuthority('course:course:save')")
-    public Resp<Object> save(String teacherid,@RequestBody CourseEntity course){
+    public Resp<Object> createcourse(@RequestBody CourseVO courseVO){
         //save必须在一个事务中
         //校验course的id值是否合法
-        if(course.getCourseId()!="")
-        {
-            course.setCourseId("");
-        }
-        //保存课程信息
-		courseService.save(course);
-        CourseTeacherEntity courseTeacherEntity = new CourseTeacherEntity();
-        courseTeacherEntity.setCourseId(Long.parseLong(course.getCourseId()));
-        courseTeacherEntity.setUserId(Long.parseLong(teacherid));
-        //保存教师与课程之间的关系
-        courseTeacherService.save(courseTeacherEntity);
-
+        //生成一个VO进行接收然后再分别拆装
+        courseService.createCourse(courseVO);
         return Resp.ok(null);
     }
 
@@ -117,7 +109,7 @@ public class CourseController {
     @ApiOperation("删除课程")
     @PostMapping("/delete")
     @PreAuthorize("hasAuthority('course:course:delete')")
-    public Resp<Object> delete(@RequestBody Long[] courseIds){
+    public Resp<Object> delete(@RequestBody String[] courseIds){
 		courseService.removeByIds(Arrays.asList(courseIds));
         return Resp.ok(null);
     }

@@ -8,9 +8,8 @@
 
 package com.hebin.bbs.dao;
 
-import com.hebin.bbs.entity.BbsEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Mapper;
+import com.hebin.bbs.entity.BbsEntity;
 
 /**
  * 
@@ -19,7 +18,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @email 649980884@@qq.com
  * @date 2020-05-13 14:24:50
  */
-@Mapper
+
 public interface BbsDao extends BaseMapper<BbsEntity> {
 	
 }

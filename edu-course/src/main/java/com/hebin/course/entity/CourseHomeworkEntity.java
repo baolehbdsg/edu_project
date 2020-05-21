@@ -1,7 +1,6 @@
 package com.hebin.course.entity;
 
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
@@ -24,22 +23,23 @@ public class CourseHomeworkEntity implements Serializable {
 	/**
 	 * 
 	 */
-	@TableId
+	@TableId(type = IdType.ID_WORKER_STR)
 	@ApiModelProperty(name = "id",value = "")
-	private Long id;
+	private String id;
 	/**
 	 * 
 	 */
 	@ApiModelProperty(name = "courseId",value = "")
-	private Long courseId;
+	private String courseId;
 	/**
 	 * 
 	 */
 	@ApiModelProperty(name = "homeworkId",value = "")
-	private Long homeworkId;
+	private String homeworkId;
 	/**
 	 * 
 	 */
+	@TableField(fill = FieldFill.INSERT)
 	@ApiModelProperty(name = "createTime",value = "")
 	private Date createTime;
 	/**

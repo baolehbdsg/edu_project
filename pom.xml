@@ -11,7 +11,7 @@
 
     <modules>
         <module>edu-core</module>
-        <module>edu-admin</module>
+        <module>bbs-interface</module>
     </modules>
 
 </project>

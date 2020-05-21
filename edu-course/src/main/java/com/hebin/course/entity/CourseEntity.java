@@ -1,8 +1,6 @@
 package com.hebin.course.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
@@ -36,6 +34,7 @@ public class CourseEntity implements Serializable {
 	/**
 	 * 
 	 */
+	@TableField(fill = FieldFill.INSERT)
 	@ApiModelProperty(name = "createTime",value = "")
 	private Date createTime;
 	/**
@@ -56,6 +55,7 @@ public class CourseEntity implements Serializable {
 	/**
 	 * 是否删除（逻辑删除）
 	 */
+	@TableLogic
 	@ApiModelProperty(name = "isDelete",value = "是否删除（逻辑删除）")
 	private Integer isDelete;
 

@@ -31,12 +31,12 @@ public class CourseResourceEntity implements Serializable {
 	 * 
 	 */
 	@ApiModelProperty(name = "courseId",value = "")
-	private Long courseId;
+	private String courseId;
 	/**
 	 * 
 	 */
 	@ApiModelProperty(name = "resourceId",value = "")
-	private Long resourceId;
+	private String resourceId;
 	/**
 	 * 
 	 */

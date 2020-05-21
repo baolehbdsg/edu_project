@@ -8,13 +8,14 @@
 
 package com.hebin.bbs.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * 
@@ -22,6 +23,7 @@ import lombok.Data;
  * @author hebin
  * @email 649980884@@qq.com
  * @date 2020-05-13 14:24:50
+ * 拷贝过来的包名务必与原来的包名一致
  */
 @ApiModel
 @Data
@@ -32,9 +34,9 @@ public class BbsEntity implements Serializable {
 	/**
 	 * 
 	 */
-	@TableId
+	@TableId(type = IdType.ID_WORKER_STR)
 	@ApiModelProperty(name = "bbsId",value = "")
-	private Long bbsId;
+	private String bbsId;
 	/**
 	 * 
 	 */

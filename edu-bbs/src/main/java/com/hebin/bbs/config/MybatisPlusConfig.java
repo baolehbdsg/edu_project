@@ -8,6 +8,8 @@
 
 package com.hebin.bbs.config;
 
+import com.baomidou.mybatisplus.core.injector.ISqlInjector;
+import com.baomidou.mybatisplus.extension.injector.LogicSqlInjector;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.pagination.optimize.JsqlParserCountOptimize;
 import org.mybatis.spring.annotation.MapperScan;
@@ -27,4 +29,10 @@ public class MybatisPlusConfig {
         // paginationInterceptor.setLimit(500);
         return paginationInterceptor;
     }
+    @Bean
+    public ISqlInjector sqlInjector() {
+        return new LogicSqlInjector();
+    }
 }
+
+

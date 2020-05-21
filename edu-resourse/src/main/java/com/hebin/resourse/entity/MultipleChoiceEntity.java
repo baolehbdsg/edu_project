@@ -26,7 +26,7 @@ public class MultipleChoiceEntity implements Serializable {
 	 */
 	@TableId
 	@ApiModelProperty(name = "choiceId",value = "")
-	private Long choiceId;
+	private String choiceId;
 	/**
 	 * 
 	 */

@@ -39,17 +39,17 @@ public class StuQaInteractiveEntity implements Serializable {
 	 * 
 	 */
 	@ApiModelProperty(name = "userId",value = "")
-	private Long userId;
+	private String userId;
 	/**
 	 * 
 	 */
 	@ApiModelProperty(name = "qaId",value = "")
-	private Long qaId;
+	private String qaId;
 	/**
 	 * 
 	 */
 	@ApiModelProperty(name = "interactiveId",value = "")
-	private Long interactiveId;
+	private String interactiveId;
 	/**
 	 * 题号靠前端来控制
 	 */

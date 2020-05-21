@@ -39,17 +39,17 @@ public class StuTestChoiceEntity implements Serializable {
 	 * 
 	 */
 	@ApiModelProperty(name = "testId",value = "")
-	private Long testId;
+	private String testId;
 	/**
 	 * 
 	 */
 	@ApiModelProperty(name = "choiceId",value = "")
-	private Long choiceId;
+	private String choiceId;
 	/**
 	 * 
 	 */
 	@ApiModelProperty(name = "userId",value = "")
-	private Long userId;
+	private String userId;
 	/**
 	 * 题号靠前端来控制
 	 */

@@ -8,8 +8,7 @@
 
 package com.hebin.bbs.entity;
 
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
@@ -58,16 +57,19 @@ public class MainInvitationEntity implements Serializable {
 	/**
 	 * 
 	 */
+	@TableField(fill = FieldFill.INSERT)
 	@ApiModelProperty(name = "createTime",value = "")
 	private Date createTime;
 	/**
 	 * 
 	 */
+	@TableField(fill = FieldFill.INSERT_UPDATE)
 	@ApiModelProperty(name = "updateTime",value = "")
 	private Date updateTime;
 	/**
 	 * 
 	 */
+	@TableLogic
 	@ApiModelProperty(name = "isDelete",value = "")
 	private Integer isDelete;
 

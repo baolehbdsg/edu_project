@@ -1,5 +1,7 @@
 package com.hebin.course.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
@@ -31,7 +33,7 @@ public class CourseTestRelationEntity implements Serializable {
 	 * 
 	 */
 	@ApiModelProperty(name = "courseId",value = "")
-	private Long courseId;
+	private String courseId;
 	/**
 	 * 
 	 */
@@ -40,6 +42,7 @@ public class CourseTestRelationEntity implements Serializable {
 	/**
 	 * 
 	 */
+	@TableField(fill = FieldFill.INSERT)
 	@ApiModelProperty(name = "createTime",value = "")
 	private Date createTime;
 	/**

@@ -19,7 +19,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @email 649980884@@qq.com
  * @date 2020-05-13 14:24:50
  */
-@Mapper
+
 public interface BbsReplyDao extends BaseMapper<BbsReplyEntity> {
 	
 }

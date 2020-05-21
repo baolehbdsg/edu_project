@@ -26,7 +26,7 @@ public class QuestionsAndAnswersEntity implements Serializable {
 	 */
 	@TableId
 	@ApiModelProperty(name = "qaId",value = "")
-	private Long qaId;
+	private String qaId;
 	/**
 	 * 
 	 */

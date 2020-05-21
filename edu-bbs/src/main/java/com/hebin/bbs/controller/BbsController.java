@@ -11,18 +11,16 @@ package com.hebin.bbs.controller;
 import java.util.Arrays;
 
 
-import com.hebin.bbs.entity.BbsEntity;
 import com.hebin.core.bean.PageVo;
 import com.hebin.core.bean.QueryCondition;
 import com.hebin.core.bean.Resp;
+import com.hebin.bbs.entity.BbsEntity;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
 import com.hebin.bbs.service.BbsService;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
 /**
@@ -62,17 +60,19 @@ public class BbsController {
     }
 
     /**
-     * 保存
+     * 随着课程创建同时创建课程论坛
+     * openfeign的远程调用
      */
-    @ApiOperation("保存")
-    @PostMapping("/save")
+    @ApiOperation("创建课程论坛")
+    @PostMapping("/bbsapi/createcoursebbs")
     @PreAuthorize("hasAuthority('bbs:bbs:save')")
-    public Resp<Object> save(@RequestBody BbsEntity bbs){
-		bbsService.save(bbs);
-
-        return Resp.ok(null);
+    public Resp<String> createcoursebbs(@RequestParam(value = "bbsName",required = true) String bbsName){
+        BbsEntity bbsEntity=new BbsEntity();
+        bbsEntity.setBbsId("");
+        bbsEntity.setForumName(bbsName);
+		bbsService.save(bbsEntity);
+        return Resp.ok(bbsEntity.getBbsId());
     }
-
     /**
      * 修改
      */
@@ -81,7 +81,6 @@ public class BbsController {
     @PreAuthorize("hasAuthority('bbs:bbs:update')")
     public Resp<Object> update(@RequestBody BbsEntity bbs){
 		bbsService.updateById(bbs);
-
         return Resp.ok(null);
     }
 

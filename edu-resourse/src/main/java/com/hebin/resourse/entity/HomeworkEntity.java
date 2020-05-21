@@ -26,7 +26,7 @@ public class HomeworkEntity implements Serializable {
 	 */
 	@TableId
 	@ApiModelProperty(name = "homeworkId",value = "")
-	private Long homeworkId;
+	private String homeworkId;
 	/**
 	 * 
 	 */

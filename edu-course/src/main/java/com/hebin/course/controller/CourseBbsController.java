@@ -80,7 +80,6 @@ public class CourseBbsController {
 
         return Resp.ok(null);
     }
-
     /**
      * 删除
      */

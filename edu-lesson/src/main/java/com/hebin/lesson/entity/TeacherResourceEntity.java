@@ -39,11 +39,11 @@ public class TeacherResourceEntity implements Serializable {
 	 * 
 	 */
 	@ApiModelProperty(name = "userId",value = "")
-	private Long userId;
+	private String userId;
 	/**
 	 * 
 	 */
 	@ApiModelProperty(name = "resourceId",value = "")
-	private Long resourceId;
+	private String resourceId;
 
 }

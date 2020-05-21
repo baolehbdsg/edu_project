@@ -84,7 +84,7 @@ public class UserRegisterController {
         //设置用户角色
         userRoleEntity.setUserRoleRole(1L);
         //对应的用户id
-        userRoleEntity.setUserRoleUserid(Long.parseLong(student.getUserId()));
+        userRoleEntity.setUserRoleUserid(student.getUserId());
         userRoleService.save(userRoleEntity);
 
         return Resp.ok("注册成功");
@@ -105,7 +105,7 @@ public class UserRegisterController {
         //设置用户角色
         userRoleEntity.setUserRoleRole(2L);
         //对应的用户id
-        userRoleEntity.setUserRoleUserid(Long.parseLong(teacher.getUserId()));
+        userRoleEntity.setUserRoleUserid(teacher.getUserId());
         userRoleService.save(userRoleEntity);
         return Resp.ok("注册成功");
     }

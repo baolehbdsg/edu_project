@@ -31,66 +31,73 @@ import com.hebin.course.service.CourseHomeworkService;
 public class CourseHomeworkController {
     @Autowired
     private CourseHomeworkService courseHomeworkService;
-
     /**
-     * 列表
+     * 获取课程作业列表
      */
-    @ApiOperation("分页查询(排序)")
-    @GetMapping("/list")
+    @ApiOperation("获取课程作业列表")
+    @GetMapping("/list/homework/{courseId}")
     @PreAuthorize("hasAuthority('course:coursehomework:list')")
-    public Resp<PageVo> list(QueryCondition queryCondition) {
-        PageVo page = courseHomeworkService.queryPage(queryCondition);
-
+    public Resp<PageVo> list(QueryCondition queryCondition,@PathVariable("courseId") String courseId)
+    {
+        //学生和教师都可以获取
+        PageVo page = courseHomeworkService.getCourseHomeworkList(queryCondition,courseId);
         return Resp.ok(page);
     }
 
 
     /**
-     * 信息
+     * 作业详情查看
      */
-    @ApiOperation("详情查询")
-    @GetMapping("/info/{id}")
+    @ApiOperation("作业详情查看")
+    @GetMapping("/info/homework/{id}")
     @PreAuthorize("hasAuthority('course:coursehomework:info')")
-    public Resp<CourseHomeworkEntity> info(@PathVariable("id") Long id){
+    public Resp<CourseHomeworkEntity> info(@PathVariable("id") String id){
 		CourseHomeworkEntity courseHomework = courseHomeworkService.getById(id);
 
         return Resp.ok(courseHomework);
     }
 
     /**
-     * 保存
+     * 发布作业
      */
-    @ApiOperation("保存")
-    @PostMapping("/save")
+    @ApiOperation("发布作业")
+    @PostMapping("/create/homework")
     @PreAuthorize("hasAuthority('course:coursehomework:save')")
-    public Resp<Object> save(@RequestBody CourseHomeworkEntity courseHomework){
+    public Resp<Object> createhomework(@RequestBody CourseHomeworkEntity courseHomework){
+        //校验id是否合法
+        //
+        if(courseHomework.getId()!="")
+        {
+            courseHomework.setId("");
+        }
+
 		courseHomeworkService.save(courseHomework);
 
         return Resp.ok(null);
     }
 
     /**
-     * 修改
+     * 修改作业信息
      */
-    @ApiOperation("修改")
-    @PostMapping("/update")
+    @ApiOperation("修改作业信息")
+    @PostMapping("/updat/homework")
     @PreAuthorize("hasAuthority('course:coursehomework:update')")
     public Resp<Object> update(@RequestBody CourseHomeworkEntity courseHomework){
 		courseHomeworkService.updateById(courseHomework);
 
-        return Resp.ok(null);
+        return Resp.ok("sucsess");
     }
-
     /**
-     * 删除
+     * 删除作业
      */
-    @ApiOperation("删除")
-    @PostMapping("/delete")
+    @ApiOperation("删除作业")
+    @PostMapping("/delete/homework")
     @PreAuthorize("hasAuthority('course:coursehomework:delete')")
-    public Resp<Object> delete(@RequestBody Long[] ids){
+    public Resp<Object> delete(@RequestBody String[] ids){
 		courseHomeworkService.removeByIds(Arrays.asList(ids));
-
         return Resp.ok(null);
     }
+
+
 
 }

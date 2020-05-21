@@ -1,5 +1,6 @@
 package com.hebin.course.service.impl;
 
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 import java.util.Map;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -22,6 +23,15 @@ public class CourseHomeworkServiceImpl extends ServiceImpl<CourseHomeworkDao, Co
                 new QueryWrapper<CourseHomeworkEntity>()
         );
 
+        return new PageVo(page);
+    }
+
+    @Override
+    public PageVo getCourseHomeworkList(QueryCondition params,String courseId) {
+        IPage<CourseHomeworkEntity> page=new Query<CourseHomeworkEntity>().getPage(params);
+        QueryWrapper qw = new QueryWrapper();
+        qw.eq("course_id",Long.parseLong(courseId));
+        baseMapper.selectPage(page,qw);
         return new PageVo(page);
     }
 

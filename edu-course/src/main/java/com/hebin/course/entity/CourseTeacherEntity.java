@@ -32,11 +32,11 @@ public class CourseTeacherEntity implements Serializable {
 	 * 
 	 */
 	@ApiModelProperty(name = "courseId",value = "")
-	private Long courseId;
+	private String courseId;
 	/**
 	 * 
 	 */
 	@ApiModelProperty(name = "userId",value = "")
-	private Long userId;
+	private String userId;
 
 }

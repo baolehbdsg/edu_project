@@ -26,7 +26,7 @@ public class ResourceEntityEntity implements Serializable {
 	 */
 	@TableId
 	@ApiModelProperty(name = "resourceId",value = "")
-	private Long resourceId;
+	private String resourceId;
 	/**
 	 * 
 	 */

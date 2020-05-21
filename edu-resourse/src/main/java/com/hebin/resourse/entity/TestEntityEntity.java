@@ -1,6 +1,7 @@
 package com.hebin.resourse.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -26,10 +27,11 @@ public class TestEntityEntity implements Serializable {
 	 */
 	@TableId
 	@ApiModelProperty(name = "testId",value = "")
-	private Long testId;
+	private String testId;
 	/**
 	 * 是否删除（逻辑删除）
 	 */
+	@TableLogic
 	@ApiModelProperty(name = "isDelete",value = "是否删除（逻辑删除）")
 	private Integer isDelete;
 	/**

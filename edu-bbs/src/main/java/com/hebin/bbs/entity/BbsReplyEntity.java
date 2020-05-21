@@ -8,8 +8,7 @@
 
 package com.hebin.bbs.entity;
 
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
@@ -34,22 +33,22 @@ public class BbsReplyEntity implements Serializable {
 	 */
 	@TableId
 	@ApiModelProperty(name = "replyId",value = "")
-	private Long replyId;
+	private String replyId;
 	/**
 	 * 
 	 */
 	@ApiModelProperty(name = "invitationId",value = "")
-	private Long invitationId;
+	private String invitationId;
 	/**
 	 * 
 	 */
 	@ApiModelProperty(name = "userId",value = "")
-	private Long userId;
+	private String userId;
 	/**
 	 * 
 	 */
 	@ApiModelProperty(name = "eduUserId",value = "")
-	private Long eduUserId;
+	private String eduUserId;
 	/**
 	 * 
 	 */
@@ -63,21 +62,24 @@ public class BbsReplyEntity implements Serializable {
 	/**
 	 * 
 	 */
+	@TableField(fill = FieldFill.INSERT)
 	@ApiModelProperty(name = "replyTime",value = "")
 	private Date replyTime;
 	/**
 	 * 
 	 */
+	@TableField(fill = FieldFill.INSERT_UPDATE)
 	@ApiModelProperty(name = "updateTime",value = "")
 	private Date updateTime;
 	/**
 	 * Ŀ
 	 */
-	@ApiModelProperty(name = "parentId",value = "Ŀ")
-	private Long parentId;
+	@ApiModelProperty(name = "parentId",value = "")
+	private String parentId;
 	/**
 	 * 
 	 */
+	@TableLogic
 	@ApiModelProperty(name = "isDelete",value = "")
 	private Integer isDelete;
 	/**

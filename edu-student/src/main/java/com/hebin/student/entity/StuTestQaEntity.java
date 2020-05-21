@@ -39,17 +39,17 @@ public class StuTestQaEntity implements Serializable {
 	 * 
 	 */
 	@ApiModelProperty(name = "userId",value = "")
-	private Long userId;
+	private String userId;
 	/**
 	 * 
 	 */
 	@ApiModelProperty(name = "qaId",value = "")
-	private Long qaId;
+	private String qaId;
 	/**
 	 * 
 	 */
 	@ApiModelProperty(name = "testId",value = "")
-	private Long testId;
+	private String testId;
 	/**
 	 * 题号靠前端来控制
 	 */

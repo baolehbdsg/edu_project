@@ -1,5 +1,6 @@
 package com.hebin.resourse.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
@@ -24,19 +25,19 @@ public class InteractiveQaEntity implements Serializable {
 	/**
 	 * 
 	 */
-	@TableId
+	@TableId(type = IdType.AUTO)
 	@ApiModelProperty(name = "id",value = "")
 	private Long id;
 	/**
 	 * 
 	 */
 	@ApiModelProperty(name = "interactiveId",value = "")
-	private Long interactiveId;
+	private String interactiveId;
 	/**
 	 * 
 	 */
 	@ApiModelProperty(name = "qaId",value = "")
-	private Long qaId;
+	private String qaId;
 	/**
 	 * 
 	 */

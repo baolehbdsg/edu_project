@@ -26,7 +26,7 @@ public class InteractiveEntityEntity implements Serializable {
 	 */
 	@TableId
 	@ApiModelProperty(name = "interactiveId",value = "")
-	private Long interactiveId;
+	private String interactiveId;
 	/**
 	 * 
 	 */

@@ -26,7 +26,7 @@ public class JudgeEntity implements Serializable {
 	 */
 	@TableId
 	@ApiModelProperty(name = "choiceId",value = "")
-	private Long choiceId;
+	private String choiceId;
 	/**
 	 * 
 	 */
