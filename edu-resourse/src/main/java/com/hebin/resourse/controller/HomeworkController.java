@@ -49,11 +49,10 @@ public class HomeworkController {
      * 信息
      */
     @ApiOperation("详情查询")
-    @GetMapping("/info/{homeworkId}")
+    @GetMapping("/gethomeworkdetail/{homeworkId}")
     @PreAuthorize("hasAuthority('resourse:homework:info')")
-    public Resp<HomeworkEntity> info(@PathVariable("homeworkId") Long homeworkId){
+    public Resp<HomeworkEntity> getHomeworkDetail(@PathVariable("homeworkId") String homeworkId){
 		HomeworkEntity homework = homeworkService.getById(homeworkId);
-
         return Resp.ok(homework);
     }
 

@@ -2,6 +2,7 @@ package com.hebin.course.service.impl;
 
 import com.hebin.core.utils.DateUtils;
 import com.hebin.course.VO.HomeworkVO;
+import com.hebin.course.VO.ImportHomeworkVO;
 import com.hebin.course.entity.CourseHomeworkEntity;
 import com.hebin.course.feign.Lessonfeign;
 import com.hebin.course.feign.Resoursefeign;
@@ -73,6 +74,23 @@ public class CourseHomeworkServiceImpl extends ServiceImpl<CourseHomeworkDao, Co
         teacherHomeworkEntity.setUserId(homeworkVO.getTeacherId());
         lessonfeign.saveHomework(teacherHomeworkEntity);
         return "success";
+    }
+
+    @Override
+    public String importCourseHomework(ImportHomeworkVO importHomeworkVO) {
+        //先生成一个CourseHomework对象，然后遍历保存
+        CourseHomeworkEntity courseHomeworkEntity =new CourseHomeworkEntity();
+        courseHomeworkEntity.setCourseId(importHomeworkVO.getCourseId());
+        courseHomeworkEntity.setDeadline((Date) importHomeworkVO.getDeadline());
+        courseHomeworkEntity.setCanDelay(importHomeworkVO.getCanDelay());
+        courseHomeworkEntity.setCreateTime(new Date());
+        for (String homeworkId:importHomeworkVO.getHomeworkIds()) {
+            //每次必须重置id会有插入错误，因为框架自动返回ID
+            courseHomeworkEntity.setId("");
+            courseHomeworkEntity.setHomeworkId(homeworkId);
+            courseHomeworkService.save(courseHomeworkEntity);
+        }
+        return "ok";
     }
 
 }

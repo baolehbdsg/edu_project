@@ -16,6 +16,7 @@ import com.hebin.core.bean.QueryCondition;
 import com.hebin.core.bean.Resp;
 import com.hebin.lesson.VO.LessonHomeworkVO;
 import com.hebin.lesson.entiry.TeacherHomeworkEntity;
+import com.hebin.resourse.entity.HomeworkEntity;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,34 +43,32 @@ public class TeacherHomeworkController {
     private TeacherHomeworkService teacherHomeworkService;
 
     /**
-     * 列表
+     * 查看当前教师的课程资源中的作业
      */
     @ApiOperation("分页查询(排序)")
     @GetMapping("/list")
     @PreAuthorize("hasAuthority('lesson:teacherhomework:list')")
-    public Resp<PageVo> list(QueryCondition queryCondition) {
-        PageVo page = teacherHomeworkService.queryPage(queryCondition);
-
+    public Resp<PageVo> list(QueryCondition queryCondition,@RequestParam("teacherId")String teacherId) {
+        PageVo page = teacherHomeworkService.queryPageById(queryCondition,teacherId);
         return Resp.ok(page);
     }
 
 
     /**
-     * 信息
+     * 查看具体作业信息
      */
-    @ApiOperation("详情查询")
-    @GetMapping("/info/{id}")
+    @ApiOperation("查看具体作业信息")
+    @GetMapping("/info/{homeworkId}")
     @PreAuthorize("hasAuthority('lesson:teacherhomework:info')")
-    public Resp<TeacherHomeworkEntity> info(@PathVariable("id") Long id){
-		TeacherHomeworkEntity teacherHomework = teacherHomeworkService.getById(id);
-
-        return Resp.ok(teacherHomework);
+    public Resp<HomeworkEntity> info(@PathVariable("homeworkId") String homeworkId){
+		HomeworkEntity homework=teacherHomeworkService.getLessonHomeWorkDetail(homeworkId);
+        return Resp.ok(homework);
     }
 
     /**
-     * 通过课程区同时保存到备课区
+     * 课程区创建作业，同时保存到备课区
      */
-    @ApiOperation("通过课程区同时保存到备课区")
+    @ApiOperation("课程区创建作业，同时保存到备课区")
     @PostMapping("/save/homework")
     @PreAuthorize("hasAuthority('lesson:teacherhomework:save')")
     public void saveHomework(@RequestBody TeacherHomeworkEntity teacherHomework){

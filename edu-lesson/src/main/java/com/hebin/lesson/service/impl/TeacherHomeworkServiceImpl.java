@@ -54,4 +54,20 @@ public class TeacherHomeworkServiceImpl extends ServiceImpl<TeacherHomeworkDao, 
         return "OK";
     }
 
+    @Override
+    public PageVo queryPageById(QueryCondition queryCondition, String teacherId) {
+        IPage<TeacherHomeworkEntity> page = this.page(
+                new Query<TeacherHomeworkEntity>().getPage(queryCondition),
+                new QueryWrapper<TeacherHomeworkEntity>().eq("user_id",teacherId)
+        );
+        return new PageVo(page);
+    }
+
+    @Override
+    public HomeworkEntity getLessonHomeWorkDetail(String homeworkId) {
+        HomeworkEntity homeworkEntity = new HomeworkEntity();
+        homeworkEntity=resourseFeign.getHomeworkDetail(homeworkId).getData();
+        return homeworkEntity;
+    }
+
 }

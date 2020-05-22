@@ -3,6 +3,7 @@ package com.hebin.course.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hebin.core.bean.*;
 import com.hebin.course.VO.HomeworkVO;
+import com.hebin.course.VO.ImportHomeworkVO;
 import com.hebin.course.entity.CourseHomeworkEntity;
 
 
@@ -19,5 +20,7 @@ public interface CourseHomeworkService extends IService<CourseHomeworkEntity> {
     PageVo getCourseHomeworkList(QueryCondition params,String courseId);
 
     String createCourseHomework(HomeworkVO homeworkVO);
+
+    String importCourseHomework(ImportHomeworkVO importHomeworkVO);
 }
 
