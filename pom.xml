@@ -12,6 +12,9 @@
     <modules>
         <module>edu-core</module>
         <module>bbs-interface</module>
+        <module>course-interface</module>
+        <module>resourse-interface</module>
+        <module>lesson-interface</module>
     </modules>
 
 </project>

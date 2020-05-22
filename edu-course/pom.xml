@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.hebin.edu</groupId>
-    <artifactId>course</artifactId>
+    <artifactId>course-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>course</name>
     <description>Demo project for Spring Boot</description>
@@ -20,6 +20,21 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.edu</groupId>
+            <artifactId>resourse-interface</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.edu</groupId>
+            <artifactId>lesson-interface</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.edu</groupId>
+            <artifactId>course-interface</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>com.hebin</groupId>
             <artifactId>edu-core</artifactId>

@@ -1,19 +1,18 @@
 package com.hebin.resourse.controller;
 
 import java.util.Arrays;
-import java.util.Map;
 
 
 import com.hebin.core.bean.PageVo;
 import com.hebin.core.bean.QueryCondition;
 import com.hebin.core.bean.Resp;
+import com.hebin.resourse.entity.HomeworkEntity;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import com.hebin.resourse.entity.HomeworkEntity;
 import com.hebin.resourse.service.HomeworkService;
 
 
@@ -59,15 +58,15 @@ public class HomeworkController {
     }
 
     /**
-     * 保存
+     * 发布作业
      */
-    @ApiOperation("保存")
-    @PostMapping("/save")
+    @ApiOperation("发布作业")
+    @PostMapping("/publish/homework")
     @PreAuthorize("hasAuthority('resourse:homework:save')")
-    public Resp<Object> save(@RequestBody HomeworkEntity homework){
-		homeworkService.save(homework);
+    public Resp<String> publishHomework(@RequestBody HomeworkEntity homework){
 
-        return Resp.ok(null);
+        return Resp.ok(homeworkService.publishHomework(homework));
+
     }
 
     /**

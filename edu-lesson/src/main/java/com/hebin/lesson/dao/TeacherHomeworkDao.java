@@ -8,8 +8,8 @@
 
 package com.hebin.lesson.dao;
 
-import com.hebin.lesson.entity.TeacherHomeworkEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.hebin.lesson.entiry.TeacherHomeworkEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

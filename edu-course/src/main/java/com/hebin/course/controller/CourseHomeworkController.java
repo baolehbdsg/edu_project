@@ -1,18 +1,18 @@
 package com.hebin.course.controller;
 
 import java.util.Arrays;
-import java.util.Map;
 
 
 import com.hebin.core.bean.*;
 
+import com.hebin.course.VO.HomeworkVO;
+import com.hebin.course.entity.CourseHomeworkEntity;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import com.hebin.course.entity.CourseHomeworkEntity;
 import com.hebin.course.service.CourseHomeworkService;
 
 
@@ -61,17 +61,11 @@ public class CourseHomeworkController {
      * 发布作业
      */
     @ApiOperation("发布作业")
-    @PostMapping("/create/homework")
+    @PostMapping("/create/coursehomework")
     @PreAuthorize("hasAuthority('course:coursehomework:save')")
-    public Resp<Object> createhomework(@RequestBody CourseHomeworkEntity courseHomework){
-        //校验id是否合法
-        //
-        if(courseHomework.getId()!="")
-        {
-            courseHomework.setId("");
-        }
+    public Resp<Object> createCourseHomework(@RequestBody HomeworkVO homeworkVO){
 
-		courseHomeworkService.save(courseHomework);
+		courseHomeworkService.createCourseHomework(homeworkVO);
 
         return Resp.ok(null);
     }

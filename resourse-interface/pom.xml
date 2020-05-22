@@ -17,7 +17,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>bbs-interface</artifactId>
+    <artifactId>resourse-interface</artifactId>
     <dependencies>
         <dependency>
             <groupId>com.hebin</groupId>
@@ -30,5 +30,6 @@
             <version>5.1.4.RELEASE</version>
         </dependency>
     </dependencies>
+
 
 </project>

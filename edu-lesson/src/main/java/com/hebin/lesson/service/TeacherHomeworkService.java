@@ -8,10 +8,11 @@
 
 package com.hebin.lesson.service;
 
-import com.hebin.lesson.entity.TeacherHomeworkEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hebin.core.bean.PageVo;
 import com.hebin.core.bean.QueryCondition;
+import com.hebin.lesson.VO.LessonHomeworkVO;
+import com.hebin.lesson.entiry.TeacherHomeworkEntity;
 
 
 /**
@@ -24,5 +25,7 @@ import com.hebin.core.bean.QueryCondition;
 public interface TeacherHomeworkService extends IService<TeacherHomeworkEntity> {
 
     PageVo queryPage(QueryCondition params);
+
+    String createHomework(LessonHomeworkVO lessonHomeworkVO);
 }
 

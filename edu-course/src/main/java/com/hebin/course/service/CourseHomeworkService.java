@@ -1,8 +1,9 @@
 package com.hebin.course.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.hebin.course.entity.CourseHomeworkEntity;
 import com.hebin.core.bean.*;
+import com.hebin.course.VO.HomeworkVO;
+import com.hebin.course.entity.CourseHomeworkEntity;
 
 
 /**
@@ -16,5 +17,7 @@ public interface CourseHomeworkService extends IService<CourseHomeworkEntity> {
 
     PageVo queryPage(QueryCondition params);
     PageVo getCourseHomeworkList(QueryCondition params,String courseId);
+
+    String createCourseHomework(HomeworkVO homeworkVO);
 }
 

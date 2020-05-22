@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.hebin.edu</groupId>
-    <artifactId>lesson</artifactId>
+    <artifactId>lesson-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>lesson</name>
     <description>备课区微服务</description>
@@ -20,6 +20,16 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.edu</groupId>
+            <artifactId>resourse-interface</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.edu</groupId>
+            <artifactId>lesson-interface</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>

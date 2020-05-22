@@ -1,7 +1,7 @@
 package com.hebin.course.dao;
 
-import com.hebin.course.entity.CourseHomeworkEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.hebin.course.entity.CourseHomeworkEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

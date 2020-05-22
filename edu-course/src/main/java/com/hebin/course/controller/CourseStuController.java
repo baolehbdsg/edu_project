@@ -53,8 +53,8 @@ public class CourseStuController {
     @PreAuthorize("hasAuthority('course:coursestu:save')")
     public Resp<Object> elective(String studentId,String courseId){
         CourseStuEntity courseStuEntity = new CourseStuEntity();
-        courseStuEntity.setCourseId(Long.parseLong(courseId));
-        courseStuEntity.setUserId(Long.parseLong(studentId));
+        courseStuEntity.setCourseId(courseId);
+        courseStuEntity.setUserId(studentId);
 		courseStuService.save(courseStuEntity);
         return Resp.ok("success");
     }

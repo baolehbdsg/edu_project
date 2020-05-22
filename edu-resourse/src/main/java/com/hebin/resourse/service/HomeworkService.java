@@ -1,9 +1,9 @@
 package com.hebin.resourse.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.hebin.resourse.entity.HomeworkEntity;
 import com.hebin.core.bean.PageVo;
 import com.hebin.core.bean.QueryCondition;
+import com.hebin.resourse.entity.HomeworkEntity;
 
 
 /**
@@ -16,5 +16,9 @@ import com.hebin.core.bean.QueryCondition;
 public interface HomeworkService extends IService<HomeworkEntity> {
 
     PageVo queryPage(QueryCondition params);
+
+    String publishHomework(HomeworkEntity homework);
+
+//    PageVo createHomework(HomeworkVO homeworkVO);
 }
 

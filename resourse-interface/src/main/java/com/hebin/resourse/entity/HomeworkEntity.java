@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2020. edu_project.
+ *
+ * 作者：何彬.
+ *
+ * 版权所有，侵权必究.
+ */
+
 package com.hebin.resourse.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -5,7 +13,6 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
 
 /**
