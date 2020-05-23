@@ -40,4 +40,7 @@ public class TestEntityEntity implements Serializable {
 	@ApiModelProperty(name = "testTitle",value = "")
 	private String testTitle;
 
+	@ApiModelProperty(name = "testTitle",value = "")
+	private String introduction;
+
 }
