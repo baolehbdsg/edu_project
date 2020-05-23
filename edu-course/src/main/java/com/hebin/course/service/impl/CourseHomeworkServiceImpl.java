@@ -1,6 +1,7 @@
 package com.hebin.course.service.impl;
 
 import com.hebin.core.utils.DateUtils;
+import com.hebin.course.DTO.HomeworkDetailDTO;
 import com.hebin.course.VO.HomeworkVO;
 import com.hebin.course.VO.ImportHomeworkVO;
 import com.hebin.course.entity.CourseHomeworkEntity;
@@ -91,6 +92,18 @@ public class CourseHomeworkServiceImpl extends ServiceImpl<CourseHomeworkDao, Co
             courseHomeworkService.save(courseHomeworkEntity);
         }
         return "ok";
+    }
+
+    @Override
+    public HomeworkDetailDTO getHomeworkDetail(String homeworkId, String courseId) {
+        HomeworkEntity homeworkEntity=resoursefeign.getHomeworkDetail(homeworkId).getData();
+        HomeworkDetailDTO homeworkDetailDTO  = new HomeworkDetailDTO();
+        BeanUtils.copyProperties(homeworkEntity,homeworkDetailDTO);
+        QueryWrapper<CourseHomeworkEntity> qw=new QueryWrapper<CourseHomeworkEntity>();
+        qw.and(i -> i.eq("homework_id", homeworkId).eq("course_id", courseId));
+        CourseHomeworkEntity courseHomeworkEntity=courseHomeworkService.getOne(qw);
+        BeanUtils.copyProperties(courseHomeworkEntity,homeworkDetailDTO);
+        return homeworkDetailDTO;
     }
 
 }

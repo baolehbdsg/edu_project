@@ -62,13 +62,7 @@ public class CourseHomeworkController {
     public Resp<HomeworkDetailDTO> detailHomework(@RequestParam("homeworkid") String homeworkId,@RequestParam("courseid") String courseId){
         //在课程端的作业详情查看应该是可以看到开始时间，截止时间，是否可以延迟提交等信息
         //所以要进行封装
-        HomeworkEntity homeworkEntity=resoursefeign.getHomeworkDetail(homeworkId).getData();
-        HomeworkDetailDTO homeworkDetailDTO  = new HomeworkDetailDTO();
-        BeanUtils.copyProperties(homeworkEntity,homeworkDetailDTO);
-        QueryWrapper<CourseHomeworkEntity> qw=new QueryWrapper<CourseHomeworkEntity>();
-        qw.and(i -> i.eq("homework_id", homeworkId).eq("course_id", courseId));
-        CourseHomeworkEntity courseHomeworkEntity=courseHomeworkService.getOne(qw);
-        BeanUtils.copyProperties(courseHomeworkEntity,homeworkDetailDTO);
+        HomeworkDetailDTO homeworkDetailDTO = courseHomeworkService.getHomeworkDetail(homeworkId,courseId);
         return Resp.ok(homeworkDetailDTO);
     }
 
