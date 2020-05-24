@@ -66,4 +66,6 @@ public class StuTestChoiceEntity implements Serializable {
 	@ApiModelProperty(name = "stuTestChoiceAnswer",value = "")
 	private String stuTestChoiceAnswer;
 
+	@ApiModelProperty(name="完成时间")
+	private Date finishTime;
 }

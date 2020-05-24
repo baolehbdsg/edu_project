@@ -51,4 +51,10 @@ public class CourseTestRelationEntity implements Serializable {
 	@ApiModelProperty(name = "deadline",value = "截止日期必须指定")
 	private Date deadline;
 
+	@TableField(value = "is_publish")
+	@ApiModelProperty(name="发布状态")
+	private Integer publish;
+	@ApiModelProperty(name = "测试的总分")
+	private String total_score;
+
 }

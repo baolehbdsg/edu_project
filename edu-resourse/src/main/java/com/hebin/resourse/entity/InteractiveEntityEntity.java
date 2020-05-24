@@ -43,4 +43,5 @@ public class InteractiveEntityEntity implements Serializable {
 	@ApiModelProperty(name = "isDelete",value = "")
 	private Integer isDelete;
 
+
 }

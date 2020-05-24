@@ -39,4 +39,7 @@ public class CourseTeacherEntity implements Serializable {
 	@ApiModelProperty(name = "userId",value = "")
 	private String userId;
 
+	@ApiModelProperty(name = "是否本课程的创建者")
+	private Boolean owner;
+
 }
