@@ -33,30 +33,20 @@ import com.hebin.user.service.TeacherService;
  * @email 649980884@@qq.com
  * @date 2020-05-13 19:48:49
  */
-@Api(tags = "教师用户 管理")
+@Api(tags = "教师用户个人信息管理")
 @RestController
 @RequestMapping("user/teacher")
 public class TeacherController {
     @Autowired
     private TeacherService teacherService;
 
-    /**
-     * 列表
-     */
-    @ApiOperation("分页查询(排序)")
-    @GetMapping("/list")
-    @PreAuthorize("hasAuthority('user:teacher:list')")
-    public Resp<PageVo> list(QueryCondition queryCondition) {
-        PageVo page = teacherService.queryPage(queryCondition);
 
-        return Resp.ok(page);
-    }
 
 
     /**
-     * 信息
+     * 查看个人信息
      */
-    @ApiOperation("详情查询")
+    @ApiOperation("教师个人信息查询")
     @GetMapping("/info/{userId}")
     @PreAuthorize("hasAuthority('user:teacher:info')")
     public Resp<TeacherEntity> info(@PathVariable("userId") Long userId){
@@ -66,19 +56,7 @@ public class TeacherController {
     }
 
     /**
-     * 保存
-     */
-    @ApiOperation("保存")
-    @PostMapping("/save")
-    @PreAuthorize("hasAuthority('user:teacher:save')")
-    public Resp<Object> save(@RequestBody TeacherEntity teacher){
-		teacherService.save(teacher);
-
-        return Resp.ok(null);
-    }
-
-    /**
-     * 修改
+     * 修改个人信息
      */
     @ApiOperation("修改")
     @PostMapping("/update")
@@ -86,19 +64,7 @@ public class TeacherController {
     public Resp<Object> update(@RequestBody TeacherEntity teacher){
 		teacherService.updateById(teacher);
 
-        return Resp.ok(null);
-    }
-
-    /**
-     * 删除
-     */
-    @ApiOperation("删除")
-    @PostMapping("/delete")
-    @PreAuthorize("hasAuthority('user:teacher:delete')")
-    public Resp<Object> delete(@RequestBody Long[] userIds){
-		teacherService.removeByIds(Arrays.asList(userIds));
-
-        return Resp.ok(null);
+        return Resp.ok("修改成功");
     }
 
 }

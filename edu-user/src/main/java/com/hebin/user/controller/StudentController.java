@@ -35,7 +35,7 @@ import com.hebin.user.service.StudentService;
  * @email 649980884@@qq.com
  * @date 2020-05-13 19:48:49
  */
-@Api(tags = "学生用户 管理")
+@Api(tags = "学生用户个人信息管理")
 @RestController
 @RequestMapping("user/student")
 public class StudentController {
@@ -43,22 +43,9 @@ public class StudentController {
     private StudentService studentService;
 
     /**
-     * 列表
-     */
-    @ApiOperation("分页查询(排序)")
-    @GetMapping("/list")
-    @PreAuthorize("hasAuthority('user:student:list')")
-    public Resp<PageVo> list(QueryCondition queryCondition) {
-        PageVo page = studentService.queryPage(queryCondition);
-
-        return Resp.ok(page);
-    }
-
-
-    /**
      * 信息
      */
-    @ApiOperation("详情查询")
+    @ApiOperation("学生用户个人信息查询")
     @GetMapping("/info/{userId}")
     @PreAuthorize("hasAuthority('user:student:info')")
     public Resp<StudentEntity> info(@PathVariable("userId") Long userId){
@@ -67,41 +54,18 @@ public class StudentController {
         return Resp.ok(student);
     }
 
-    /**
-     * 保存
-     */
-    @ApiOperation("保存")
-    @PostMapping("/save")
-    @PreAuthorize("hasAuthority('user:student:save')")
-    public Resp<Object> save(@RequestBody StudentEntity student){
-		studentService.save(student);
-
-
-        return Resp.ok(null);
-    }
 
     /**
-     * 修改
+     * 修改个人信息
      */
-    @ApiOperation("修改")
+    @ApiOperation("修改个人信息")
     @PostMapping("/update")
     @PreAuthorize("hasAuthority('user:student:update')")
     public Resp<Object> update(@RequestBody StudentEntity student){
 		studentService.updateById(student);
 
-        return Resp.ok(null);
+        return Resp.ok("修改成功");
     }
 
-    /**
-     * 删除
-     */
-    @ApiOperation("删除")
-    @PostMapping("/delete")
-    @PreAuthorize("hasAuthority('user:student:delete')")
-    public Resp<Object> delete(@RequestBody Long[] userIds){
-		studentService.removeByIds(Arrays.asList(userIds));
-
-        return Resp.ok(null);
-    }
 
 }

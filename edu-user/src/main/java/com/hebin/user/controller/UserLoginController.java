@@ -44,7 +44,7 @@ public class UserLoginController {
         qwTea.eq("user_tel",userInfo).or().eq("user_mail",userInfo);
         StudentEntity stu=studentService.getOne(qwStu);
         TeacherEntity tea=teacherService.getOne(qwTea);
-        System.out.println(stu+"  "+tea);
+//        System.out.println(stu+"  "+tea);
 //      未来将使用redis保存用户登录信息
        if(stu==null && tea == null)
        {

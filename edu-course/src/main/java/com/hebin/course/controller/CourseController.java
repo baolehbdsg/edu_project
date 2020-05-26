@@ -99,7 +99,7 @@ public class CourseController {
     @PreAuthorize("hasAuthority('course:course:delete')")
     public Resp<Object> delete(@RequestBody String[] courseIds){
 		courseService.removeByIds(Arrays.asList(courseIds));
-        return Resp.ok(null);
+        return Resp.ok("删除成功");
     }
 
 
