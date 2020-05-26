@@ -1,5 +1,7 @@
 package com.hebin.resourse.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
@@ -42,5 +44,9 @@ public class ResourceEntityEntity implements Serializable {
 	 */
 	@ApiModelProperty(name = "isDelete",value = "")
 	private Integer isDelete;
+
+	@ApiModelProperty(name = "创建时间")
+	@TableField(fill = FieldFill.INSERT)
+	private Date createTime;
 
 }

@@ -11,10 +11,10 @@ package com.hebin.bbs.controller;
 import java.util.Arrays;
 
 
+import com.hebin.bbs.entity.BbsEntity;
 import com.hebin.core.bean.PageVo;
 import com.hebin.core.bean.QueryCondition;
 import com.hebin.core.bean.Resp;
-import com.hebin.bbs.entity.BbsEntity;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

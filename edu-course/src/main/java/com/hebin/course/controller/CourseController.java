@@ -1,27 +1,15 @@
 package com.hebin.course.controller;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hebin.core.bean.*;
 
 import com.hebin.course.VO.CourseVO;
-import com.hebin.course.entity.CourseBbsEntity;
-import com.hebin.course.entity.CourseStuEntity;
-import com.hebin.course.entity.CourseTeacherEntity;
-import com.hebin.course.feign.Bbsfeign;
-import com.hebin.course.service.CourseBbsService;
-import com.hebin.course.service.CourseStuService;
 import com.hebin.course.service.CourseTeacherService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -86,7 +74,7 @@ public class CourseController {
         //save必须在一个事务中
         //校验course的id值是否合法
         //生成一个VO进行接收然后再分别拆装
-        courseService.createCourse(courseVO);
+//        courseService.createCourse(courseVO);
         return Resp.ok(null);
     }
 

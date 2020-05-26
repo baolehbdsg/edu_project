@@ -1,5 +1,5 @@
 server:
-  port: 8061
+  port: 8001
 spring:
   cloud:
     nacos:
@@ -14,4 +14,4 @@ mybatis-plus:
   mapper-locations: classpath:mapper/resourse/*.xml  # 读取映射文件
   global-config:
     db-config:
-      id-type: ID_WORKER_STR  # 默认使用数据库自增
+      id-type: ID_WORKER_STR  # 默认使用数据库自增application.yml

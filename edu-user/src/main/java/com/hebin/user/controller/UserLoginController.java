@@ -55,7 +55,7 @@ public class UserLoginController {
            if(userPassword.equals(stu.getUserPassword()))
            {
 
-               return Resp.ok("登录成功");
+               return Resp.ok(stu);
            }
            else
            {
@@ -67,7 +67,7 @@ public class UserLoginController {
            if(userPassword.equals(tea.getUserPassword()))
            {
 //               session.setAttribute("userInfo",userInfo);
-               return Resp.ok("登录成功");
+               return Resp.ok(tea);
            }
            else
            {

@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: homework-service
+  cloud:
+    nacos:
+      config:
+        server-addr: 192.168.56.1:8848
+        namespace:
+        group: homework-service
+        file-extension: yml  # 默认找服务名.properties文件

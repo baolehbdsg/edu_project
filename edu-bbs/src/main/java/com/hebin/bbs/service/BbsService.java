@@ -9,9 +9,9 @@
 package com.hebin.bbs.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.hebin.bbs.entity.BbsEntity;
 import com.hebin.core.bean.PageVo;
 import com.hebin.core.bean.QueryCondition;
-import com.hebin.bbs.entity.BbsEntity;
 
 
 /**

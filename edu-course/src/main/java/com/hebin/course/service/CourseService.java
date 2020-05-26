@@ -15,7 +15,7 @@ import com.hebin.core.bean.*;
  */
 public interface CourseService extends IService<CourseEntity> {
 
-    PageVo createCourse(CourseVO courseVO);
+//    PageVo createCourse(CourseVO courseVO);
 
     PageVo queryPage(QueryCondition params);
 }

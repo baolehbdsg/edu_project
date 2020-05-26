@@ -15,6 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 public interface BbsApi {
-    @PostMapping("bbs/bbs/bbsapi/createcoursebbs")
+    @PostMapping("bbs/coursebbs/bbsapi/createcoursebbs")
     public Resp<String> createcoursebbs(@RequestParam(value = "bbsName",required = true) String bbsName);
 }

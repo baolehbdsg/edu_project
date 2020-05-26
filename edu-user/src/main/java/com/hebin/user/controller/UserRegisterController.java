@@ -11,6 +11,7 @@ package com.hebin.user.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.hebin.core.bean.Resp;
+import com.hebin.user.VO.UserRegisterVO;
 import com.hebin.user.entity.StudentEntity;
 import com.hebin.user.entity.TeacherEntity;
 import com.hebin.user.entity.UserEntity;
@@ -40,26 +41,28 @@ public class UserRegisterController {
     private UserRoleService userRoleService;
 
     @ApiOperation("用户注册")
-    @PostMapping("/{userType}")
     @PreAuthorize("hasAuthority('user:register:save')")
-    public Resp<Object> userRegister(@PathVariable Integer userType, @RequestBody UserEntity userEntity) throws Exception {
+    public Resp<Object> userRegister(@RequestBody UserRegisterVO userRegisterVO) throws Exception {
         //先查一下看看是否注册过，没有注册过再往下走
         //条件构造器
         QueryWrapper<StudentEntity> qwStu = new QueryWrapper<>();
         QueryWrapper<TeacherEntity> qwTea = new QueryWrapper<>();
-        //如果注册手机已经存在
+        //如果注册手机或者邮箱已经存在
         StudentEntity student = new StudentEntity();
         //属性值复制
-        BeanUtils.copyProperties(userEntity,student);
+        BeanUtils.copyProperties(userRegisterVO,student);
         qwStu.eq("user_tel",student.getUserTel()).or().eq("user_mail",student.getUserMail());
         TeacherEntity teacher = new TeacherEntity();
-        BeanUtils.copyProperties(userEntity,teacher);
+        BeanUtils.copyProperties(userRegisterVO,teacher);
         qwTea.eq("user_tel",teacher.getUserTel()).or().eq("user_mail",teacher.getUserMail());
         if(!studentService.list(qwStu).isEmpty()||!teacherService.list(qwTea).isEmpty())
         {
             return Resp.fail("用户已存在");
         }
-        if(userType==0)
+        //短信校验
+        //成功往下走
+        //失败返回失败
+        if(userRegisterVO.getUserType()==0)
         {
             return saveStudent(student);
         }
@@ -86,7 +89,7 @@ public class UserRegisterController {
         //对应的用户id
         userRoleEntity.setUserRoleUserid(student.getUserId());
         userRoleService.save(userRoleEntity);
-
+        //注册成功可以返回一个session或者保存到token中
         return Resp.ok("注册成功");
     }
 
@@ -107,6 +110,7 @@ public class UserRegisterController {
         //对应的用户id
         userRoleEntity.setUserRoleUserid(teacher.getUserId());
         userRoleService.save(userRoleEntity);
+        //注册成功可以返回一个session或者保存到token中
         return Resp.ok("注册成功");
     }
 
