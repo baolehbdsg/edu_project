@@ -8,13 +8,16 @@
 
 package com.hebin.bbs.feign;
 
+
+import com.hebin.bbs.DTO.CoursebbsDTO;
 import com.hebin.core.bean.Resp;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
 public interface BbsApi {
-    @PostMapping("bbs/coursebbs/bbsapi/createcoursebbs")
-    public Resp<String> createcoursebbs(@RequestParam(value = "bbsName",required = true) String bbsName);
+    @PostMapping("bbs/bbs/bbsapi/createcoursebbs")
+    public Resp<String> createcoursebbs(@RequestBody CoursebbsDTO coursebbsDTO);
 }

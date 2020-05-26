@@ -1,6 +1,7 @@
 package com.hebin.bbs.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.hebin.bbs.DTO.CoursebbsDTO;
 import com.hebin.bbs.entity.CourseBbsEntity;
 import com.hebin.core.bean.PageVo;
 import com.hebin.core.bean.QueryCondition;
@@ -16,5 +17,7 @@ import com.hebin.core.bean.QueryCondition;
 public interface CourseBbsService extends IService<CourseBbsEntity> {
 
     PageVo queryPage(QueryCondition params);
+
+    void createBBS(CoursebbsDTO coursebbsDTO);
 }
 

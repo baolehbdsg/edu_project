@@ -1,6 +1,6 @@
 package com.hebin.course.service.impl;
 
-import com.hebin.bbs.entity.CourseBbsEntity;
+import com.hebin.bbs.DTO.CoursebbsDTO;
 import com.hebin.course.VO.CourseVO;
 import com.hebin.course.entity.CourseTeacherEntity;
 import com.hebin.course.feign.Bbsfeign;
@@ -24,41 +24,38 @@ public class CourseServiceImpl extends ServiceImpl<CourseDao, CourseEntity> impl
     CourseService courseService;
     @Autowired
     CourseTeacherService courseTeacherService;
-//    @Autowired
-//    CourseBbsService courseBbsService;
     @Autowired
     Bbsfeign bbsfeign;
-//    @Override
-//    public PageVo createCourse(CourseVO courseVO) {
-//        //预处理课程id
-//        if(courseVO.getCourseId()!="")
-//        {
-//            courseVO.setCourseId("");
-//        }
-//        //将属性值复制到course中
-//        CourseEntity courseEntity = new CourseEntity();
-//        BeanUtils.copyProperties(courseVO,courseEntity);
-//        //保存课程信息
-//        courseService.save(courseEntity);
-//
-//        String teacherId= courseVO.getTeacherId();
-//        CourseTeacherEntity courseTeacherEntity = new CourseTeacherEntity();
-//        courseTeacherEntity.setCourseId(courseEntity.getCourseId());
-//        courseTeacherEntity.setUserId(teacherId);
-//        //保存教师和课程的关系
-//        courseTeacherService.save(courseTeacherEntity);
-//        //生成BBS信息,远程调用进行保存
-//        String bbsName=courseEntity.getCourseName()+"的课程论坛";
-//        Resp<String> resp = new Resp<>();
-//        //并返回bbsId
-//        resp=bbsfeign.createcoursebbs(bbsName);
-//        //保存bbs与课程的关系
-//        CourseBbsEntity courseBbsEntity = new CourseBbsEntity();
-//        courseBbsEntity.setCbBbs(resp.getData());
-//        courseBbsEntity.setCbCourse(courseEntity.getCourseId());
-//        courseBbsService.save(courseBbsEntity);
-//        return null;
-//    }
+    @Override
+    public PageVo createCourse(CourseVO courseVO) {
+        //预处理课程id
+        if(courseVO.getCourseId()!="")
+        {
+            courseVO.setCourseId("");
+        }
+        //将属性值复制到course中
+        CourseEntity courseEntity = new CourseEntity();
+        BeanUtils.copyProperties(courseVO,courseEntity);
+        //保存课程信息
+        courseService.save(courseEntity);
+
+        String teacherId= courseVO.getTeacherId();
+        CourseTeacherEntity courseTeacherEntity = new CourseTeacherEntity();
+        courseTeacherEntity.setCourseId(courseEntity.getCourseId());
+        courseTeacherEntity.setUserId(teacherId);
+        //保存教师和课程的关系
+        courseTeacherService.save(courseTeacherEntity);
+
+        Resp<String> resp = new Resp<>();
+        //远程调用创建bbs
+        //先封装信息
+        //再进行远程调用
+        CoursebbsDTO coursebbsDTO = new CoursebbsDTO();
+        coursebbsDTO.setCourseId(courseEntity.getCourseId());
+        coursebbsDTO.setCourseName(courseEntity.getCourseName());
+        resp=bbsfeign.createcoursebbs(coursebbsDTO);
+        return null;
+    }
 
     @Override
     public PageVo queryPage(QueryCondition params) {

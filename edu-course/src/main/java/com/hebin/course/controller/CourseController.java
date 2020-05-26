@@ -74,7 +74,7 @@ public class CourseController {
         //save必须在一个事务中
         //校验course的id值是否合法
         //生成一个VO进行接收然后再分别拆装
-//        courseService.createCourse(courseVO);
+        courseService.createCourse(courseVO);
         return Resp.ok(null);
     }
 
@@ -88,7 +88,7 @@ public class CourseController {
 
 		courseService.updateById(course);
 
-        return Resp.ok(null);
+        return Resp.ok("修改成功");
     }
 
     /**
@@ -98,6 +98,14 @@ public class CourseController {
     @PostMapping("/delete")
     @PreAuthorize("hasAuthority('course:course:delete')")
     public Resp<Object> delete(@RequestBody String[] courseIds){
+        //删除course记录
+        //删除course_bbs记录
+        //删除与作业相关信息
+        //删除与互动相关信息
+        //删除与测试相关信息
+        //删除与警告相关信息
+        //删除学生选课记录
+        //删除教师与课程的相关信息
 		courseService.removeByIds(Arrays.asList(courseIds));
         return Resp.ok("删除成功");
     }

@@ -5,8 +5,10 @@ import java.util.Map;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.hebin.bbs.DTO.CoursebbsDTO;
 import com.hebin.core.bean.*;
 
+import com.hebin.course.VO.CourseStuVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +28,7 @@ import com.hebin.course.service.CourseStuService;
  * @email 649980884@qq.com
  * @date 2020-05-15 15:13:14
  */
-@Api(tags = "课程与学生 管理")
+@Api(tags = "课程与学生")
 @RestController
 @RequestMapping("course/coursestu")
 public class CourseStuController {
@@ -51,26 +53,25 @@ public class CourseStuController {
     @ApiOperation("学生选课")
     @PostMapping("/elective")
     @PreAuthorize("hasAuthority('course:coursestu:save')")
-    public Resp<Object> elective(String studentId,String courseId){
+    public Resp<Object> elective(@RequestBody CourseStuVO courseStuVO){
         CourseStuEntity courseStuEntity = new CourseStuEntity();
-        courseStuEntity.setCourseId(courseId);
-        courseStuEntity.setUserId(studentId);
+        courseStuEntity.setCourseId(courseStuVO.getCourseId());
+        courseStuEntity.setUserId(courseStuVO.getStuId());
 		courseStuService.save(courseStuEntity);
-        return Resp.ok("success");
+        return Resp.ok("选课成功");
     }
 
-    /**
-     * 修改学生信息--
-     */
-    @ApiOperation("修改学生信息")
-    @PostMapping("/update")
-    @PreAuthorize("hasAuthority('course:coursestu:update')")
-    public Resp<Object> update(@RequestBody CourseStuEntity courseStu){
-		courseStuService.updateById(courseStu);
-
-        return Resp.ok(null);
-    }
-
+//    /**
+//     * 修改学生信息--
+//     */
+//    @ApiOperation("修改学生信息")
+//    @PostMapping("/update")
+//    @PreAuthorize("hasAuthority('course:coursestu:update')")
+//    public Resp<Object> update(@RequestBody CourseStuEntity courseStu){
+//		courseStuService.updateById(courseStu);
+//
+//        return Resp.ok(null);
+//    }
     /**
      * 删除学生
      */

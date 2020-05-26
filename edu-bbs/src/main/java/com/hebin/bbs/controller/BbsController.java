@@ -11,12 +11,16 @@ package com.hebin.bbs.controller;
 import java.util.Arrays;
 
 
+import com.hebin.bbs.DTO.CoursebbsDTO;
 import com.hebin.bbs.entity.BbsEntity;
+import com.hebin.bbs.entity.CourseBbsEntity;
+import com.hebin.bbs.service.CourseBbsService;
 import com.hebin.core.bean.PageVo;
 import com.hebin.core.bean.QueryCondition;
 import com.hebin.core.bean.Resp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -33,29 +37,17 @@ import com.hebin.bbs.service.BbsService;
 public class BbsController {
     @Autowired
     private BbsService bbsService;
-
-    /**
-     * 列表
-     */
-    @ApiOperation("分页查询(排序)")
-    @GetMapping("/list")
-    @PreAuthorize("hasAuthority('bbs:bbs:list')")
-    public Resp<PageVo> list(QueryCondition queryCondition) {
-        PageVo page = bbsService.queryPage(queryCondition);
-
-        return Resp.ok(page);
-    }
-
-
+    @Autowired
+    private CourseBbsService courseBbsService;
     /**
      * 信息
      */
-    @ApiOperation("详情查询")
+    @ApiOperation("查看课程论坛")
     @GetMapping("/info/{bbsId}")
     @PreAuthorize("hasAuthority('bbs:bbs:info')")
     public Resp<BbsEntity> info(@PathVariable("bbsId") Long bbsId){
 		BbsEntity bbs = bbsService.getById(bbsId);
-
+        //返回一个bbs的基本信息
         return Resp.ok(bbs);
     }
 
@@ -66,12 +58,10 @@ public class BbsController {
     @ApiOperation("创建课程论坛")
     @PostMapping("/bbsapi/createcoursebbs")
     @PreAuthorize("hasAuthority('bbs:bbs:save')")
-    public Resp<String> createcoursebbs(@RequestParam(value = "bbsName",required = true) String bbsName){
-        BbsEntity bbsEntity=new BbsEntity();
-        bbsEntity.setBbsId("");
-        bbsEntity.setForumName(bbsName);
-		bbsService.save(bbsEntity);
-        return Resp.ok(bbsEntity.getBbsId());
+    public Resp<String> createcoursebbs(@RequestBody CoursebbsDTO coursebbsDTO){
+
+        courseBbsService.createBBS(coursebbsDTO);
+        return Resp.ok(null);
     }
     /**
      * 修改
