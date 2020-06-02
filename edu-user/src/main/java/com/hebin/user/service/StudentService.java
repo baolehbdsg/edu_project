@@ -8,10 +8,11 @@
 
 package com.hebin.user.service;
 
-import com.hebin.user.entity.StudentEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hebin.core.bean.PageVo;
 import com.hebin.core.bean.QueryCondition;
+import com.hebin.user.VO.CourseStuVO;
+import com.hebin.user.entity.StudentEntity;
 
 
 /**
@@ -24,5 +25,7 @@ import com.hebin.core.bean.QueryCondition;
 public interface StudentService extends IService<StudentEntity> {
 
     PageVo queryPage(QueryCondition params);
+
+//    PageVo getCourseStu(CourseStuVO courseStuVO);
 }
 

@@ -14,7 +14,6 @@ import com.hebin.core.bean.Resp;
 import com.hebin.user.VO.UserRegisterVO;
 import com.hebin.user.entity.StudentEntity;
 import com.hebin.user.entity.TeacherEntity;
-import com.hebin.user.entity.UserEntity;
 import com.hebin.user.entity.UserRoleEntity;
 import com.hebin.user.service.StudentService;
 import com.hebin.user.service.TeacherService;
@@ -25,9 +24,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 
 @Api(tags = "用户注册")
 @RestController

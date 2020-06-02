@@ -16,7 +16,9 @@ public interface CourseStuService extends IService<CourseStuEntity> {
 
     PageVo queryPage(QueryCondition params);
 
+    //获取课程学生列表
     PageVo getListCourseStu(QueryCondition params,String courseId);
-    PageVo getListStuCourseInfo(QueryCondition params,String courseId);
+    //学生获取自己的课程信息
+    PageVo getListStuCourse(QueryCondition params,String userId);
 }
 

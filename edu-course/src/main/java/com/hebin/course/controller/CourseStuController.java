@@ -38,12 +38,12 @@ public class CourseStuController {
     /**
      * 学生查看已选课程信息
      */
-    @ApiOperation("学生查看已选课程信息")
+    @ApiOperation("学生查看已选课程列表")
     @GetMapping("/liststucourseinfo/{userId}")
     @PreAuthorize("hasAuthority('course:coursestu:info')")
     public Resp<Object> info(QueryCondition queryCondition,@PathVariable("userId") String userId){
 
-        PageVo pageVo = courseStuService.getListStuCourseInfo(queryCondition,userId);
+        PageVo pageVo = courseStuService.getListStuCourse(queryCondition,userId);
         return Resp.ok(pageVo);
     }
 
@@ -90,11 +90,11 @@ public class CourseStuController {
     /**
      * 查询选课学生情况
      */
-    @ApiOperation("查询选课学生情况")
+    @ApiOperation("查询选课学生列表")
     @GetMapping("/electivestudent/{courseId}")
     @PreAuthorize("hasAuthority('course:course:delete')")
     public Resp<Object> electiveStudent(QueryCondition queryCondition,@PathVariable("courseId") String courseId){
-
+        //应该是返回查出来的学生的基本信息加上小组名称，小组序号
         PageVo pageVo=courseStuService.getListCourseStu(queryCondition,courseId);
 
         return Resp.ok(pageVo);

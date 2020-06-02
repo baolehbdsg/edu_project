@@ -8,8 +8,8 @@
 
 package com.hebin.user.dao;
 
-import com.hebin.user.entity.StudentEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.hebin.user.entity.StudentEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

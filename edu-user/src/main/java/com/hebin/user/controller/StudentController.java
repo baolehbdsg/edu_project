@@ -8,15 +8,15 @@
 
 package com.hebin.user.controller;
 
-import java.util.Arrays;
 
-
-import com.hebin.user.entity.StudentEntity;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.hebin.core.bean.PageVo;
+import com.hebin.core.bean.Query;
 import com.hebin.core.bean.QueryCondition;
 import com.hebin.core.bean.Resp;
-import com.hebin.user.service.RoleService;
-import com.hebin.user.service.UserRoleService;
+import com.hebin.user.VO.CourseStuVO;
+import com.hebin.user.entity.StudentEntity;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +24,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.hebin.user.service.StudentService;
-
-
 
 
 /**
@@ -67,5 +65,23 @@ public class StudentController {
         return Resp.ok("修改成功");
     }
 
+//    @ApiOperation("学生用户个人信息查询")
+//    @PostMapping("/getcoursestudent")
+//    public Resp<PageVo> getCourseStudent(@RequestBody CourseStuVO courseStuVO)
+//    {
+//
+//        PageVo pageVo = studentService.getCourseStu(courseStuVO);
+//        return Resp.ok(null);
+//    }
 
+    @ApiOperation("选课学生列表")
+    @GetMapping("/userlist")
+    public PageVo userlist(QueryCondition params, String []userIds){
+
+        IPage<StudentEntity> page = new Query<StudentEntity>().getPage(params);
+        QueryWrapper<StudentEntity> qw = new QueryWrapper<StudentEntity>();
+        qw.in("user_id",userIds);
+        studentService.page(page,qw);
+        return new PageVo(page);
+    }
 }

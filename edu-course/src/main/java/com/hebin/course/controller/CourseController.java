@@ -36,6 +36,8 @@ public class CourseController {
     private CourseTeacherService courseTeacherService;
     /**
      * 列表
+     * 返回给前端一个courseEntity列表
+     *
      */
     @ApiOperation("获取教师已创建课程页面")
     @GetMapping("/list")

@@ -6,7 +6,7 @@
  * 版权所有，侵权必究.
  */
 
-package feign;
+package com.hebin.lesson.feign;
 
 import com.hebin.lesson.entiry.TeacherHomeworkEntity;
 import io.swagger.annotations.ApiOperation;

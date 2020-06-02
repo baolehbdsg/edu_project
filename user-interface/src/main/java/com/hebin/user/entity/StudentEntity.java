@@ -13,9 +13,10 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
 
 /**
  * ѧ
@@ -96,5 +97,8 @@ public class StudentEntity extends UserEntity implements Serializable {
 	 */
 	@ApiModelProperty(name = "isBanned",value = "")
 	private Integer isBanned;
+
+	@ApiModelProperty(name="学生学号")
+	private String userSid;
 
 }

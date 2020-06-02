@@ -12,17 +12,13 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.hebin.core.bean.Resp;
 import com.hebin.user.entity.StudentEntity;
 import com.hebin.user.entity.TeacherEntity;
-import com.hebin.user.entity.UserRoleEntity;
 import com.hebin.user.service.StudentService;
 import com.hebin.user.service.TeacherService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpSession;
 
 @Api(tags = "用户登录")
 @RestController

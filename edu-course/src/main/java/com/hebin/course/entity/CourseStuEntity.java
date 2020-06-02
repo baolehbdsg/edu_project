@@ -1,13 +1,12 @@
 package com.hebin.course.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
+import org.apache.ibatis.annotations.Insert;
 
 /**
  * 学生参与课程
@@ -39,4 +38,7 @@ public class CourseStuEntity implements Serializable {
 	@ApiModelProperty(name = "userId",value = "")
 	private String userId;
 
+	@TableField(fill = FieldFill.INSERT)
+	@ApiModelProperty(name = "加入时间")
+	private Date createTime;
 }
