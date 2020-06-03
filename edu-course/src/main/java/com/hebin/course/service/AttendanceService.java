@@ -15,5 +15,8 @@ import com.hebin.core.bean.*;
 public interface AttendanceService extends IService<AttendanceEntity> {
 
     PageVo queryPage(QueryCondition params);
+
+
+    PageVo getlistpage(QueryCondition queryCondition, String courseId);
 }
 

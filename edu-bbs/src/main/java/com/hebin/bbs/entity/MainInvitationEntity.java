@@ -31,19 +31,19 @@ public class MainInvitationEntity implements Serializable {
 	/**
 	 * 
 	 */
-	@TableId
+	@TableId(value = "invitation_id",type = IdType.ID_WORKER_STR)
 	@ApiModelProperty(name = "invitationId",value = "")
-	private Long invitationId;
+	private String invitationId;
 	/**
 	 * 
 	 */
 	@ApiModelProperty(name = "bbsId",value = "")
-	private Long bbsId;
+	private String bbsId;
 	/**
 	 * 
 	 */
 	@ApiModelProperty(name = "userId",value = "")
-	private Long userId;
+	private String userId;
 	/**
 	 * 
 	 */

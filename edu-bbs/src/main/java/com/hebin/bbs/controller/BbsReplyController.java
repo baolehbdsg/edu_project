@@ -40,23 +40,12 @@ public class BbsReplyController {
     @Autowired
     private BbsReplyService bbsReplyService;
 
-    /**
-     * 列表
-     */
-    @ApiOperation("分页查询(排序)")
-    @GetMapping("/list")
-    @PreAuthorize("hasAuthority('bbs:bbsreply:list')")
-    public Resp<PageVo> list(QueryCondition queryCondition) {
-        PageVo page = bbsReplyService.queryPage(queryCondition);
-
-        return Resp.ok(page);
-    }
 
 
     /**
-     * 信息
+     * 查看该贴下的次级回复
      */
-    @ApiOperation("详情查询")
+    @ApiOperation("次级回复查询")
     @GetMapping("/info/{replyId}")
     @PreAuthorize("hasAuthority('bbs:bbsreply:info')")
     public Resp<BbsReplyEntity> info(@PathVariable("replyId") Long replyId){
@@ -66,38 +55,27 @@ public class BbsReplyController {
     }
 
     /**
-     * 保存
+     * 发表评论
      */
-    @ApiOperation("保存")
-    @PostMapping("/save")
+    @ApiOperation("发表评论")
+    @PostMapping("/pushreply")
     @PreAuthorize("hasAuthority('bbs:bbsreply:save')")
-    public Resp<Object> save(@RequestBody BbsReplyEntity bbsReply){
+    public Resp<Object> pushReply(@RequestBody BbsReplyEntity bbsReply){
 		bbsReplyService.save(bbsReply);
-
         return Resp.ok(null);
     }
 
-    /**
-     * 修改
-     */
-    @ApiOperation("修改")
-    @PostMapping("/update")
-    @PreAuthorize("hasAuthority('bbs:bbsreply:update')")
-    public Resp<Object> update(@RequestBody BbsReplyEntity bbsReply){
-		bbsReplyService.updateById(bbsReply);
-
-        return Resp.ok(null);
-    }
 
     /**
-     * 删除
+     * 删除回复
+     * 要加权限
+     * 先这样写
      */
-    @ApiOperation("删除")
+    @ApiOperation("删除回复，次级回复也要删除")
     @PostMapping("/delete")
     @PreAuthorize("hasAuthority('bbs:bbsreply:delete')")
-    public Resp<Object> delete(@RequestBody Long[] replyIds){
+    public Resp<Object> delete(@RequestBody String[] replyIds){
 		bbsReplyService.removeByIds(Arrays.asList(replyIds));
-
         return Resp.ok(null);
     }
 

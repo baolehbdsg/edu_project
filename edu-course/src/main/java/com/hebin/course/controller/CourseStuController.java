@@ -9,6 +9,7 @@ import com.hebin.bbs.DTO.CoursebbsDTO;
 import com.hebin.core.bean.*;
 
 import com.hebin.course.VO.CourseStuVO;
+import com.hebin.course.VO.DeleteCourseStuVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,14 +79,11 @@ public class CourseStuController {
     @ApiOperation("删除当前已选课学生")
     @PostMapping("/delete")
     @PreAuthorize("hasAuthority('course:coursestu:delete')")
-    public Resp<Object> delete(@RequestBody Long[] ids){
-        QueryWrapper<CourseStuEntity> qw  = new QueryWrapper();
-        for(int i=0;i<ids.length;i++)
-        {
-            qw.eq("user_id",ids[i]);
-            courseStuService.remove(qw);
-        }
-        return Resp.ok("success");
+    public Resp<Object> delete(@RequestBody DeleteCourseStuVO deleteCourseStuVO){
+        if(courseStuService.deleteCourseStu(deleteCourseStuVO)) return Resp.ok("删除成功");
+        else return Resp.fail("删除失败");
+
+
     }
     /**
      * 查询选课学生情况

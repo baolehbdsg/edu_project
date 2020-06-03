@@ -39,65 +39,61 @@ import com.hebin.bbs.service.MainInvitationService;
 public class MainInvitationController {
     @Autowired
     private MainInvitationService mainInvitationService;
-
     /**
      * 列表
      */
-    @ApiOperation("分页查询(排序)")
-    @GetMapping("/list")
+    @ApiOperation("查看论坛内帖子列表")
+    @GetMapping("/listInvitation")
     @PreAuthorize("hasAuthority('bbs:maininvitation:list')")
-    public Resp<PageVo> list(QueryCondition queryCondition) {
-        PageVo page = mainInvitationService.queryPage(queryCondition);
+    public Resp<PageVo> listInvitation(QueryCondition queryCondition,String bbsId) {
 
-        return Resp.ok(page);
+       PageVo pageVo= mainInvitationService.getInvitationList(queryCondition,bbsId);
+        return Resp.ok(pageVo);
     }
-
-
     /**
-     * 信息
+     * 查看帖子详情
+     * 返回主回复列表
+     * 并将人名等进行显示（其实可以异步加载）
+     *
      */
-    @ApiOperation("详情查询")
+    @ApiOperation("点击帖子查看详情")
     @GetMapping("/info/{invitationId}")
     @PreAuthorize("hasAuthority('bbs:maininvitation:info')")
-    public Resp<MainInvitationEntity> info(@PathVariable("invitationId") Long invitationId){
-		MainInvitationEntity mainInvitation = mainInvitationService.getById(invitationId);
+    public Resp<Object> info(QueryCondition params,@PathVariable("invitationId") String invitationId){
+//		MainInvitationEntity mainInvitation = mainInvitationService.getById(invitationId);
+        PageVo pageVo = mainInvitationService.getReplyDetailList(params,invitationId);
 
-        return Resp.ok(mainInvitation);
+        return Resp.ok(pageVo);
     }
-
     /**
      * 保存
      */
-    @ApiOperation("保存")
-    @PostMapping("/save")
+    @ApiOperation("发帖")
+    @PostMapping("/sendInvitation")
     @PreAuthorize("hasAuthority('bbs:maininvitation:save')")
-    public Resp<Object> save(@RequestBody MainInvitationEntity mainInvitation){
+    public Resp<Object> sendInvitation(@RequestBody MainInvitationEntity mainInvitation){
 		mainInvitationService.save(mainInvitation);
-
         return Resp.ok(null);
     }
-
     /**
-     * 修改
+     * 修改，修改之前要权限校验
      */
-    @ApiOperation("修改")
+    @ApiOperation("修改帖子")
     @PostMapping("/update")
     @PreAuthorize("hasAuthority('bbs:maininvitation:update')")
     public Resp<Object> update(@RequestBody MainInvitationEntity mainInvitation){
 		mainInvitationService.updateById(mainInvitation);
-
         return Resp.ok(null);
     }
 
     /**
-     * 删除
+     * 删除，删除之前也要权限校验
      */
-    @ApiOperation("删除")
+    @ApiOperation("删除帖子")
     @PostMapping("/delete")
     @PreAuthorize("hasAuthority('bbs:maininvitation:delete')")
-    public Resp<Object> delete(@RequestBody Long[] invitationIds){
+    public Resp<Object> delete(@RequestBody String[] invitationIds){
 		mainInvitationService.removeByIds(Arrays.asList(invitationIds));
-
         return Resp.ok(null);
     }
 

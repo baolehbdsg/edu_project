@@ -13,6 +13,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.hebin.core.bean.PageVo;
 import com.hebin.core.bean.QueryCondition;
 
+import java.util.List;
+
 
 /**
  * 
@@ -24,5 +26,11 @@ import com.hebin.core.bean.QueryCondition;
 public interface MainInvitationService extends IService<MainInvitationEntity> {
 
     PageVo queryPage(QueryCondition params);
+
+    PageVo getInvitationList(QueryCondition queryCondition, String bbsId);
+
+    PageVo getReplyDetailList(QueryCondition params,String invitationId);
+
+//    Boolean removeInvitations(String []invitationIds);
 }
 

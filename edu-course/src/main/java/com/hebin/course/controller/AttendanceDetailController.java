@@ -33,63 +33,67 @@ public class AttendanceDetailController {
     private AttendanceDetailService attendanceDetailService;
 
     /**
-     * 列表
+     * 权限：教师
+     * 查看该考勤下打卡学生表
      */
     @ApiOperation("分页查询(排序)")
-    @GetMapping("/list")
+    @GetMapping("/list/{attendenceId}")
     @PreAuthorize("hasAuthority('course:attendancedetail:list')")
-    public Resp<PageVo> list(QueryCondition queryCondition) {
-        PageVo page = attendanceDetailService.queryPage(queryCondition);
+    public Resp<PageVo> list(QueryCondition queryCondition,@PathVariable("attendenceId") String attendenceId) {
+        PageVo page = attendanceDetailService.getAttendenceDetailList(queryCondition,attendenceId);
 
         return Resp.ok(page);
     }
 
 
-    /**
-     * 信息
-     */
-    @ApiOperation("详情查询")
-    @GetMapping("/info/{id}")
-    @PreAuthorize("hasAuthority('course:attendancedetail:info')")
-    public Resp<AttendanceDetailEntity> info(@PathVariable("id") Long id){
-		AttendanceDetailEntity attendanceDetail = attendanceDetailService.getById(id);
+//    /**
+//     * 信息
+//     */
+//    @ApiOperation("详情查询")
+//    @GetMapping("/info/{id}")
+//    @PreAuthorize("hasAuthority('course:attendancedetail:info')")
+//    public Resp<AttendanceDetailEntity> info(@PathVariable("id") Long id){
+//		AttendanceDetailEntity attendanceDetail = attendanceDetailService.getById(id);
+//
+//        return Resp.ok(attendanceDetail);
+//    }
 
-        return Resp.ok(attendanceDetail);
-    }
-
     /**
-     * 保存
+     * 权限：学生
+     * 学生执行考勤
      */
-    @ApiOperation("保存")
-    @PostMapping("/save")
+    @ApiOperation("学生执行考勤")
+    @PostMapping("/exeattendence")
     @PreAuthorize("hasAuthority('course:attendancedetail:save')")
-    public Resp<Object> save(@RequestBody AttendanceDetailEntity attendanceDetail){
-		attendanceDetailService.save(attendanceDetail);
-
-        return Resp.ok(null);
+    public Resp<Object> exeAttendence(@RequestBody AttendanceDetailEntity attendanceDetail){
+        //通过token获取学生Id
+        String userID = "888";
+        attendanceDetail.setUserId(userID);
+		if(attendanceDetailService.save(attendanceDetail))return Resp.ok("打卡成功");
+        else return Resp.fail("打卡失败");
     }
 
     /**
-     * 修改
+     * 权限：教师
+     * 修改学生签到信息
      */
-    @ApiOperation("修改")
-    @PostMapping("/update")
+    @ApiOperation("修改学生签到信息")
+    @PostMapping("/updateattendancedetail")
     @PreAuthorize("hasAuthority('course:attendancedetail:update')")
     public Resp<Object> update(@RequestBody AttendanceDetailEntity attendanceDetail){
 		attendanceDetailService.updateById(attendanceDetail);
-
         return Resp.ok(null);
     }
 
     /**
-     * 删除
+     * 权限：教师
+     * 删除学生打卡信息
      */
-    @ApiOperation("删除")
-    @PostMapping("/delete")
+    @ApiOperation("删除学生签到信息")
+    @PostMapping("/deleteattendancedetail")
     @PreAuthorize("hasAuthority('course:attendancedetail:delete')")
-    public Resp<Object> delete(@RequestBody Long[] ids){
-		attendanceDetailService.removeByIds(Arrays.asList(ids));
-
+    public Resp<Object> delete(@RequestBody String[] attendancedetailIds){
+		attendanceDetailService.removeByIds(Arrays.asList(attendancedetailIds));
         return Resp.ok(null);
     }
 

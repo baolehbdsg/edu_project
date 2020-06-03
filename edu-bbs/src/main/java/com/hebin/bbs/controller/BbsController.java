@@ -64,21 +64,23 @@ public class BbsController {
         return Resp.ok(null);
     }
     /**
-     * 修改
+     * 修改课程，修改课程论坛名称
+     * 远程调用
      */
-    @ApiOperation("修改")
-    @PostMapping("/update")
+    @ApiOperation("修改论坛名称")
+    @PostMapping("/bbsapi/update")
     @PreAuthorize("hasAuthority('bbs:bbs:update')")
-    public Resp<Object> update(@RequestBody BbsEntity bbs){
-		bbsService.updateById(bbs);
+    public Resp<Object> updateBBS(@RequestBody CoursebbsDTO coursebbsDTO){
+		bbsService.update();
         return Resp.ok(null);
     }
 
     /**
-     * 删除
+     * 删除课程时删除论坛
+     * 远程调用
      */
     @ApiOperation("删除")
-    @PostMapping("/delete")
+    @PostMapping("/bbsapi/delete")
     @PreAuthorize("hasAuthority('bbs:bbs:delete')")
     public Resp<Object> delete(@RequestBody Long[] bbsIds){
 		bbsService.removeByIds(Arrays.asList(bbsIds));

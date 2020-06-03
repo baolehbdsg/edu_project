@@ -33,4 +33,9 @@ public class BbsReplyServiceImpl extends ServiceImpl<BbsReplyDao, BbsReplyEntity
         return new PageVo(page);
     }
 
+    @Override
+    public void removeReply(String[] replyIds) {
+
+    }
+
 }
