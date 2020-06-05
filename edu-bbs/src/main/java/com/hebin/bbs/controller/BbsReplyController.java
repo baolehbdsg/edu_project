@@ -43,6 +43,7 @@ public class BbsReplyController {
 
 
     /**
+     * 权限，所有
      * 查看该贴下的次级回复
      */
     @ApiOperation("次级回复查询")
@@ -55,6 +56,7 @@ public class BbsReplyController {
     }
 
     /**
+     * 权限，所有
      * 发表评论
      */
     @ApiOperation("发表评论")
@@ -67,11 +69,12 @@ public class BbsReplyController {
 
 
     /**
+     * 权限：回复拥有者
      * 删除回复
      * 要加权限
      * 先这样写
      */
-    @ApiOperation("删除回复，次级回复也要删除")
+    @ApiOperation("删除回复或评论")
     @PostMapping("/delete")
     @PreAuthorize("hasAuthority('bbs:bbsreply:delete')")
     public Resp<Object> delete(@RequestBody String[] replyIds){

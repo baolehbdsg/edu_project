@@ -24,7 +24,7 @@ public class CourseHomeworkEntity implements Serializable {
 	/**
 	 * 
 	 */
-	@TableId(type = IdType.ID_WORKER_STR)
+	@TableId(type = IdType.AUTO)
 	@ApiModelProperty(name = "id",value = "")
 	private String id;
 	/**

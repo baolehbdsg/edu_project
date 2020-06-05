@@ -64,6 +64,7 @@ public class BbsController {
         return Resp.ok(null);
     }
     /**
+     *
      * 修改课程，修改课程论坛名称
      * 远程调用
      */
@@ -76,6 +77,7 @@ public class BbsController {
     }
 
     /**
+     *
      * 删除课程时删除论坛
      * 远程调用
      */

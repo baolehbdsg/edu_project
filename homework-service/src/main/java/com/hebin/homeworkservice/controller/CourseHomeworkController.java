@@ -32,6 +32,7 @@ public class CourseHomeworkController {
     @Autowired
     private CourseHomeworkService courseHomeworkService;
     /**
+     * 权限：教师，学生
      * 获取课程作业列表
      */
     @ApiOperation("获取课程作业列表")
@@ -43,8 +44,6 @@ public class CourseHomeworkController {
         PageVo page = courseHomeworkService.getCourseHomeworkList(queryCondition,courseId);
         return Resp.ok(page);
     }
-
-
     /**
      * 作业详情查看
      */
@@ -59,7 +58,9 @@ public class CourseHomeworkController {
     }
 
     /**
+     * 权限：教师
      * 发布作业
+     * 直接发布
      */
     @ApiOperation("发布作业")
     @PostMapping("/create/coursehomework")
@@ -84,6 +85,7 @@ public class CourseHomeworkController {
     }
 
     /**
+     * 权限：教师
      * 修改作业信息
      */
     @ApiOperation("修改作业信息")
@@ -91,10 +93,10 @@ public class CourseHomeworkController {
     @PreAuthorize("hasAuthority('course:coursehomework:update')")
     public Resp<Object> update(@RequestBody CourseHomeworkEntity courseHomework){
 		courseHomeworkService.updateById(courseHomework);
-
         return Resp.ok("sucsess");
     }
     /**
+     * 权限：教师
      * 删除作业
      */
     @ApiOperation("删除作业")
@@ -104,7 +106,4 @@ public class CourseHomeworkController {
 		courseHomeworkService.removeByIds(Arrays.asList(ids));
         return Resp.ok(null);
     }
-
-
-
 }

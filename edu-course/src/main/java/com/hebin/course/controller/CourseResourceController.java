@@ -58,31 +58,33 @@ public class CourseResourceController {
     }
 
     /**
-     * 保存
+     * 上传资源
      */
-    @ApiOperation("保存")
+    @ApiOperation("上传课程资源")
     @PostMapping("/save")
     @PreAuthorize("hasAuthority('course:courseresource:save')")
     public Resp<Object> save(@RequestBody CourseResourceEntity courseResource){
 		courseResourceService.save(courseResource);
-
+		//远程调用保存课程资源后，返回resourse_id
+        //然后保存course_resourse
         return Resp.ok(null);
     }
 
     /**
-     * 修改
+     * 修改课程资源
      */
-    @ApiOperation("修改")
+    @ApiOperation("修改课程资源（权限之类）")
     @PostMapping("/update")
     @PreAuthorize("hasAuthority('course:courseresource:update')")
     public Resp<Object> update(@RequestBody CourseResourceEntity courseResource){
+        //还是需要远程调用
 		courseResourceService.updateById(courseResource);
 
         return Resp.ok(null);
     }
 
     /**
-     * 删除
+     * 删除资源
      */
     @ApiOperation("删除")
     @PostMapping("/delete")

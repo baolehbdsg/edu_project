@@ -8,6 +8,8 @@
 
 package com.hebin.homeworkservice.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
@@ -69,6 +71,7 @@ public class StuCommitHomeworkEntity implements Serializable {
 	/**
 	 * 
 	 */
+	@TableField(fill = FieldFill.INSERT_UPDATE)
 	@ApiModelProperty(name = "commitTime",value = "")
 	private Date commitTime;
 	/**

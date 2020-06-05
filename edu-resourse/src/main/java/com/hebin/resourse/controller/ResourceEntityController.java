@@ -71,7 +71,7 @@ public class ResourceEntityController {
     /**
      * 修改
      */
-    @ApiOperation("修改")
+    @ApiOperation("修改资源")
     @PostMapping("/update")
     @PreAuthorize("hasAuthority('resourse:resourceentity:update')")
     public Resp<Object> update(@RequestBody ResourceEntityEntity resourceEntity){
