@@ -1,8 +1,6 @@
 package com.hebin.testservice.entity;
 
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -25,7 +23,7 @@ public class TestEntityEntity implements Serializable {
 	/**
 	 * 
 	 */
-	@TableId
+	@TableId(type = IdType.ID_WORKER_STR)
 	@ApiModelProperty(name = "testId",value = "")
 	private String testId;
 	/**
@@ -42,5 +40,4 @@ public class TestEntityEntity implements Serializable {
 
 	@ApiModelProperty(name = "testTitle",value = "")
 	private String introduction;
-
 }

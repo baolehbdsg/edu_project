@@ -8,7 +8,9 @@
 
 package com.hebin.testservice.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -69,4 +71,8 @@ public class StuTestChoiceEntity implements Serializable {
 
 	@ApiModelProperty(name="完成时间")
 	private Date finishTime;
+
+	@TableLogic
+	@ApiModelProperty(name="逻辑删除")
+	private Integer isDelete;
 }

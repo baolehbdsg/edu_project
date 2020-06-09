@@ -22,72 +22,46 @@ import java.util.Arrays;
  * @email 649980884@qq.com
  * @date 2020-05-15 14:40:29
  */
-@Api(tags = "测试实体 管理")
+@Api(tags = "测试实体")
 @RestController
 @RequestMapping("test/testentity")
 public class TestEntityController {
     @Autowired
     private TestEntityService testEntityService;
-
+//    /**
+//     * 列表
+//     */
+//    @ApiOperation("分页查询(排序)")
+//    @GetMapping("/list")
+//    @PreAuthorize("hasAuthority('resourse:testentity:list')")
+//    public Resp<PageVo> list(QueryCondition queryCondition) {
+//        PageVo page = testEntityService.queryPage(queryCondition);
+//
+//        return Resp.ok(page);
+//    }
+//    /**
+//     * 获取每个测试的基本信息
+//     * 在获取到分页列表的时候返回测试的基本信息（二次请求）
+//     */
+//    @ApiOperation("获取每个测试的基本信息")
+//    @GetMapping("/info/{testId}")
+//    @PreAuthorize("hasAuthority('resourse:testentity:info')")
+//    public Resp<TestEntityEntity> info(@PathVariable("testId") Long testId){
+//		TestEntityEntity testEntity = testEntityService.getById(testId);
+//
+//        return Resp.ok(testEntity);
+//    }
     /**
-     * 列表
+     * 修改测试标题
+     * 测试状态：未测试
      */
-    @ApiOperation("分页查询(排序)")
-    @GetMapping("/list")
-    @PreAuthorize("hasAuthority('resourse:testentity:list')")
-    public Resp<PageVo> list(QueryCondition queryCondition) {
-        PageVo page = testEntityService.queryPage(queryCondition);
-
-        return Resp.ok(page);
-    }
-
-
-    /**
-     * 信息
-     */
-    @ApiOperation("详情查询")
-    @GetMapping("/info/{testId}")
-    @PreAuthorize("hasAuthority('resourse:testentity:info')")
-    public Resp<TestEntityEntity> info(@PathVariable("testId") Long testId){
-		TestEntityEntity testEntity = testEntityService.getById(testId);
-
-        return Resp.ok(testEntity);
-    }
-
-    /**
-     * 保存
-     */
-    @ApiOperation("保存")
-    @PostMapping("/save")
-    @PreAuthorize("hasAuthority('resourse:testentity:save')")
-    public Resp<Object> save(@RequestBody TestEntityEntity testEntity){
-		testEntityService.save(testEntity);
-
-        return Resp.ok(null);
-    }
-
-    /**
-     * 修改
-     */
-    @ApiOperation("修改")
-    @PostMapping("/update")
+    @ApiOperation("修改测试标题,或内容")
+    @PostMapping("/updatetesttitle")
     @PreAuthorize("hasAuthority('resourse:testentity:update')")
-    public Resp<Object> update(@RequestBody TestEntityEntity testEntity){
-		testEntityService.updateById(testEntity);
-
-        return Resp.ok(null);
-    }
-
-    /**
-     * 删除
-     */
-    @ApiOperation("删除")
-    @PostMapping("/delete")
-    @PreAuthorize("hasAuthority('resourse:testentity:delete')")
-    public Resp<Object> delete(@RequestBody Long[] testIds){
-		testEntityService.removeByIds(Arrays.asList(testIds));
-
-        return Resp.ok(null);
+    public Resp<Object> updatetesttitle(@RequestBody TestEntityEntity testEntity){
+		if(testEntityService.updateById(testEntity))
+            return Resp.ok("修改成功");
+		else return Resp.ok("修改失败");
     }
 
 }

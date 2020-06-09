@@ -46,7 +46,7 @@ public class CourseTestRelationEntity implements Serializable {
 	 * 
 	 */
 	@ApiModelProperty(name = "testId",value = "")
-	private Long testId;
+	private String testId;
 	/**
 	 * 
 	 */
@@ -62,7 +62,8 @@ public class CourseTestRelationEntity implements Serializable {
 	@TableField(value = "is_publish")
 	@ApiModelProperty(name="发布状态")
 	private Integer publish;
+	@TableField(value = "total_score")
 	@ApiModelProperty(name = "测试的总分")
-	private String total_score;
+	private String totalScore;
 
 }

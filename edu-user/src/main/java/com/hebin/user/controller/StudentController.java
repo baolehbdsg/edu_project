@@ -25,6 +25,8 @@ import org.springframework.web.bind.annotation.*;
 
 import com.hebin.user.service.StudentService;
 
+import java.util.List;
+
 
 /**
  * ѧ
@@ -65,15 +67,6 @@ public class StudentController {
         return Resp.ok("修改成功");
     }
 
-//    @ApiOperation("学生用户个人信息查询")
-//    @PostMapping("/getcoursestudent")
-//    public Resp<PageVo> getCourseStudent(@RequestBody CourseStuVO courseStuVO)
-//    {
-//
-//        PageVo pageVo = studentService.getCourseStu(courseStuVO);
-//        return Resp.ok(null);
-//    }
-
     @ApiOperation("选课学生列表")
     @GetMapping("/userlist")
     public PageVo userlist(QueryCondition params, String []userIds){
@@ -83,5 +76,15 @@ public class StudentController {
         qw.in("user_id",userIds);
         studentService.page(page,qw);
         return new PageVo(page);
+    }
+
+    @ApiOperation("通过一组id获取学生列表")
+    @GetMapping("/userlistbyids")
+    public List<StudentEntity> userListByIds(@RequestParam("userIds") String []userIds){
+
+        QueryWrapper<StudentEntity> qw = new QueryWrapper<StudentEntity>();
+        qw.in("user_id",userIds);
+        List<StudentEntity> studentEntities=studentService.list(qw);
+        return studentEntities;
     }
 }

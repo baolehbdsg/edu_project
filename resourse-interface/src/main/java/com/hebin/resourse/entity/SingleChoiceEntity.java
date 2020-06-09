@@ -4,9 +4,9 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * 
@@ -20,7 +20,6 @@ import lombok.Data;
 @TableName("edu_single_choice")
 public class SingleChoiceEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
-
 	/**
 	 * 
 	 */

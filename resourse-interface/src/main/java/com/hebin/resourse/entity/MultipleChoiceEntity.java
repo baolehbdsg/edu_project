@@ -4,9 +4,9 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * 
@@ -17,8 +17,8 @@ import lombok.Data;
  */
 @ApiModel
 @Data
-@TableName("edu_judge")
-public class JudgeEntity implements Serializable {
+@TableName("edu_multiple_choice")
+public class MultipleChoiceEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**

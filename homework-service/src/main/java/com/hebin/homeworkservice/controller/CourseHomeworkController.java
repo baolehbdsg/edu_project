@@ -56,7 +56,6 @@ public class CourseHomeworkController {
         HomeworkDetailDTO homeworkDetailDTO = courseHomeworkService.getHomeworkDetail(homeworkId,courseId);
         return Resp.ok(homeworkDetailDTO);
     }
-
     /**
      * 权限：教师
      * 发布作业
@@ -83,7 +82,6 @@ public class CourseHomeworkController {
 
         return Resp.ok(null);
     }
-
     /**
      * 权限：教师
      * 修改作业信息

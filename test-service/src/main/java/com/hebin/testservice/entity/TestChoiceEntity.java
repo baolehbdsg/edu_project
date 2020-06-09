@@ -48,5 +48,7 @@ public class TestChoiceEntity implements Serializable {
 	 */
 	@ApiModelProperty(name = "number",value = "")
 	private Integer number;
+	@ApiModelProperty(name = "选择题类型",value = "")
+	private Integer choiceType;
 
 }

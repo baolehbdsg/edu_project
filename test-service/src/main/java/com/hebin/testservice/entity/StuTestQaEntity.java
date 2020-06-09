@@ -8,13 +8,16 @@
 
 package com.hebin.testservice.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 简答题作答情况
@@ -65,5 +68,12 @@ public class StuTestQaEntity implements Serializable {
 	 */
 	@ApiModelProperty(name = "stuInteractiveQaAnswer",value = "")
 	private String stuInteractiveQaAnswer;
+
+	@ApiModelProperty(name = "finishTime",value = "")
+	private Date finishTime;
+
+	@TableLogic
+	@ApiModelProperty(name="逻辑删除")
+	private Integer isDelete;
 
 }

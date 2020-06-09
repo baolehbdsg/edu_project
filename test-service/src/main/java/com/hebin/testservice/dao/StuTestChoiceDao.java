@@ -11,6 +11,10 @@ package com.hebin.testservice.dao;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.hebin.testservice.entity.StuTestChoiceEntity;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * 选择题作答情况
@@ -21,5 +25,5 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface StuTestChoiceDao extends BaseMapper<StuTestChoiceEntity> {
-	
+
 }
