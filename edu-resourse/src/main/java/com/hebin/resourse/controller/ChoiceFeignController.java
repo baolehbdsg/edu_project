@@ -14,6 +14,7 @@ import com.hebin.core.bean.PageVo;
 import com.hebin.core.bean.QueryCondition;
 import com.hebin.core.bean.Resp;
 import com.hebin.resourse.DTO.ChoiceDTO;
+import com.hebin.resourse.DTO.CreateChoiceDTO;
 import com.hebin.resourse.entity.JudgeEntity;
 import com.hebin.resourse.entity.MultipleChoiceEntity;
 import com.hebin.resourse.entity.QuestionsAndAnswersEntity;
@@ -49,7 +50,7 @@ public class ChoiceFeignController {
     @ApiOperation("远程调用,获取具体的选择题")
     @PostMapping("resourse/choicedetaillist")
     @PreAuthorize("hasAuthority('resourse:homework:list')")
-    public List<ChoiceDTO> choice(@RequestBody List<ChoiceDTO> choiceDTOS) {
+    public List<ChoiceDTO> choiceDetailList(@RequestBody List<ChoiceDTO> choiceDTOS) {
         //通过choiceId和type类型，查找不同的数据库
         //然后封装到List<ChoiceDTO>中
         for(int i = 0;i<choiceDTOS.size();i++)
@@ -79,5 +80,43 @@ public class ChoiceFeignController {
         }
         return choiceDTOS;
     }
+    /**
+     * 传入的只有几个属性
+     * choiceId
+     * choiceType
+     * score(题目分数)
+     * number(题号)
+     */
+    @ApiOperation("远程调用,新增一个选择题")
+    @PostMapping("resourse/createchoice")
+    @PreAuthorize("hasAuthority('resourse:homework:list')")
+    public String createChoice(@RequestBody CreateChoiceDTO createChoiceDTO)
+    {
+        if(createChoiceDTO.getChoiceType()==0)
+        {
+            SingleChoiceEntity singleChoiceEntity = new SingleChoiceEntity();
+            BeanUtils.copyProperties(createChoiceDTO,singleChoiceEntity);
+            singleChoiceService.save(singleChoiceEntity);
+            return singleChoiceEntity.getChoiceId();
+        }
+        //多选
+        else if(createChoiceDTO.getChoiceType()==1)
+        {
+            MultipleChoiceEntity multipleChoiceEntity = new MultipleChoiceEntity();
+            BeanUtils.copyProperties(createChoiceDTO,multipleChoiceEntity);
+            multipleChoiceService.save(multipleChoiceEntity);
+            return multipleChoiceEntity.getChoiceId();
+        }
+        //判断
+        else if(createChoiceDTO.getChoiceType()==2)
+        {
+            JudgeEntity judgeEntity = new JudgeEntity();
+            BeanUtils.copyProperties(createChoiceDTO,judgeEntity);
+            judgeService.save(judgeEntity);
+            return judgeEntity.getChoiceId();
+        }
+        return null;
+    }
+
 
 }

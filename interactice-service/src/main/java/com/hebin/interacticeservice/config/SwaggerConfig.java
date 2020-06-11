@@ -22,13 +22,13 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
-    @Bean("互动或测试资源")
+    @Bean("互动")
     public Docket userApis() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("互动或测试资源")
+                .groupName("互动")
                 .select()
                 .apis(RequestHandlerSelectors.withClassAnnotation(Api.class)) // 所有标了API注解的才在文档中展示
-                .paths(PathSelectors.regex("/resourse.*")) // pms下的所有请求
+                .paths(PathSelectors.regex("/interactive.*")) // pms下的所有请求
                 .build()
                 .apiInfo(apiInfo())
                 .enable(true);

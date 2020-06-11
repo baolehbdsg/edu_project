@@ -2,6 +2,7 @@ package com.hebin.testservice.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -50,5 +51,7 @@ public class TestChoiceEntity implements Serializable {
 	private Integer number;
 	@ApiModelProperty(name = "选择题类型",value = "")
 	private Integer choiceType;
-
+	@TableLogic
+	@ApiModelProperty(name = "逻辑删除",value = "")
+	private Integer	isDelete;
 }

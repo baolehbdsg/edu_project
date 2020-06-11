@@ -32,7 +32,7 @@ public class QAFeignController {
     @ApiOperation("远程调用,获取具体的简答题信息")
     @PostMapping("resourse/qadetaillist")
     @PreAuthorize("hasAuthority('resourse:homework:list')")
-    public List<QADTO> qa(@RequestBody List<QADTO> qadtos)
+    public List<QADTO> qaDetailList(@RequestBody List<QADTO> qadtos)
     {
         for(int i = 0;i<qadtos.size();i++)
         {
@@ -41,5 +41,13 @@ public class QAFeignController {
             BeanUtils.copyProperties(questionsAndAnswersEntity,qadtos.get(i));
         }
         return qadtos;
+    }
+    @ApiOperation("远程调用,新增一个填空题")
+    @PostMapping("resourse/createqa")
+    @PreAuthorize("hasAuthority('resourse:homework:list')")
+    public String createQa(@RequestBody QuestionsAndAnswersEntity questionsAndAnswersEntity)
+    {
+        questionsAndAnswersService.save(questionsAndAnswersEntity);
+        return questionsAndAnswersEntity.getQaId();
     }
 }

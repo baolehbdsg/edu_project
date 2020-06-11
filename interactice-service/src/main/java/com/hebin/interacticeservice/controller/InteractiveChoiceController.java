@@ -1,13 +1,18 @@
 package com.hebin.interacticeservice.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.hebin.core.bean.PageVo;
 import com.hebin.core.bean.QueryCondition;
 import com.hebin.core.bean.Resp;
 
+import com.hebin.interacticeservice.VO.CreateChoiceVO;
 import com.hebin.interacticeservice.entity.InteractiveChoiceEntity;
+import com.hebin.interacticeservice.feign.ResouseFeign;
 import com.hebin.interacticeservice.service.InteractiveChoiceService;
+import com.hebin.resourse.DTO.CreateChoiceDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -22,72 +27,51 @@ import java.util.Arrays;
  * @email 649980884@qq.com
  * @date 2020-05-15 14:40:29
  */
-@Api(tags = "选择与互动关系 管理")
+@Api(tags = "互动中的选择题")
 @RestController
 @RequestMapping("interactive/interactivechoice")
 public class InteractiveChoiceController {
     @Autowired
     private InteractiveChoiceService interactiveChoiceService;
-
+    @Autowired
+    private ResouseFeign resouseFeign;
     /**
-     * 列表
+     * 新增一个选择题
+     * 前端每次保存，都发送一次请求
+     *
      */
-    @ApiOperation("分页查询(排序)")
-    @GetMapping("/list")
-    @PreAuthorize("hasAuthority('resourse:interactivechoice:list')")
-    public Resp<PageVo> list(QueryCondition queryCondition) {
-        PageVo page = interactiveChoiceService.queryPage(queryCondition);
-
-        return Resp.ok(page);
-    }
-
-
-    /**
-     * 信息
-     */
-    @ApiOperation("详情查询")
-    @GetMapping("/info/{id}")
-    @PreAuthorize("hasAuthority('resourse:interactivechoice:info')")
-    public Resp<InteractiveChoiceEntity> info(@PathVariable("id") Long id){
-		InteractiveChoiceEntity interactiveChoice = interactiveChoiceService.getById(id);
-
-        return Resp.ok(interactiveChoice);
-    }
-
-    /**
-     * 保存
-     */
-    @ApiOperation("保存")
-    @PostMapping("/save")
+    @ApiOperation("新增一个选择题")
+    @PostMapping("/create/createInteractiveChoice")
     @PreAuthorize("hasAuthority('resourse:interactivechoice:save')")
-    public Resp<Object> save(@RequestBody InteractiveChoiceEntity interactiveChoice){
-		interactiveChoiceService.save(interactiveChoice);
-
+    public Resp<Object> createInteractiveChoice(@RequestBody CreateChoiceVO createChoiceVO){
+        //传互动id
+        //传选择题相关的实体进来
+        //然后远程调用保存选择题
+        //返回选择题的id保存在edu_interactive_choice中
+        CreateChoiceDTO createChoiceDTO = new CreateChoiceDTO();
+        BeanUtils.copyProperties(createChoiceVO,createChoiceDTO);
+        String choiceId = resouseFeign.createChoice(createChoiceDTO);
+        InteractiveChoiceEntity interactiveChoiceEntity = new InteractiveChoiceEntity();
+        BeanUtils.copyProperties(createChoiceVO,interactiveChoiceEntity);
+        interactiveChoiceEntity.setChoiceId(choiceId);
+        interactiveChoiceEntity.setIsDelete(0);
+        interactiveChoiceService.save(interactiveChoiceEntity);
         return Resp.ok(null);
     }
-
     /**
-     * 修改
+     * 新增一个选择题
+     * 前端每次保存，都发送一次请求
+     *
      */
-    @ApiOperation("修改")
-    @PostMapping("/update")
-    @PreAuthorize("hasAuthority('resourse:interactivechoice:update')")
-    public Resp<Object> update(@RequestBody InteractiveChoiceEntity interactiveChoice){
-		interactiveChoiceService.updateById(interactiveChoice);
-
-        return Resp.ok(null);
-    }
-
-    /**
-     * 删除
-     */
-    @ApiOperation("删除")
-    @PostMapping("/delete")
-    @PreAuthorize("hasAuthority('resourse:interactivechoice:delete')")
-    public Resp<Object> delete(@RequestBody Long[] ids){
-		interactiveChoiceService.removeByIds(Arrays.asList(ids));
-
-        return Resp.ok(null);
+    @ApiOperation("删除一个选择题")
+    @PostMapping("/create/deleteInteractiveChoice")
+    @PreAuthorize("hasAuthority('resourse:interactivechoice:save')")
+    public Resp<Object> deleteInteractiveChoice(@RequestParam("interactiveId") String interactiveId,@RequestParam("choiceId")String choiceId){
+        //直接删除这层关系即可
+        QueryWrapper<InteractiveChoiceEntity> queryWrapper = new QueryWrapper<>();
+        queryWrapper.and(i->i.eq("interactive_id",interactiveId).eq("choice_id",choiceId));
+        if(interactiveChoiceService.remove(queryWrapper))return Resp.ok("删除成功");
+        else return Resp.fail("删除失败");
     }
 
 }

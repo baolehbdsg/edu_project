@@ -147,8 +147,8 @@ public class CourseTestRelationController {
             qadtos.add(qadto);
         }
         //再通过这些条目的Id去调用resourse的信息
-        List<ChoiceDTO> choices=resourseFeign.choice(choiceDTOS);
-        List<QADTO> qa=resourseFeign.qa(qadtos);
+        List<ChoiceDTO> choices=resourseFeign.choiceDetailList(choiceDTOS);
+        List<QADTO> qa=resourseFeign.qaDetailList(qadtos);
         testdetailDTO.setChoiceDTOS(choiceDTOS);
         testdetailDTO.setQadtos(qa);
         //获取resourse的值，进行封装后返回给前端

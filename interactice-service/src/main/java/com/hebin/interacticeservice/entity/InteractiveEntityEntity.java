@@ -1,6 +1,7 @@
 package com.hebin.interacticeservice.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -40,8 +41,8 @@ public class InteractiveEntityEntity implements Serializable {
 	/**
 	 * 
 	 */
+	@TableLogic
 	@ApiModelProperty(name = "isDelete",value = "")
 	private Integer isDelete;
-
 
 }

@@ -9,19 +9,18 @@
 package com.hebin.testservice.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.hebin.core.bean.PageVo;
-import com.hebin.core.bean.QueryCondition;
 import com.hebin.core.bean.Resp;
+import com.hebin.resourse.DTO.CreateChoiceDTO;
+import com.hebin.resourse.entity.QuestionsAndAnswersEntity;
 import com.hebin.testservice.DTO.StuAchievementDetail;
 import com.hebin.testservice.DTO.StuCommitListDTO;
 import com.hebin.testservice.DTO.StuInfo;
-import com.hebin.testservice.entity.StuTestChoiceEntity;
-import com.hebin.testservice.entity.StuTestQaEntity;
-import com.hebin.testservice.entity.TestEntityEntity;
+import com.hebin.testservice.VO.CreateChoiceVO;
+import com.hebin.testservice.VO.CreateQaVO;
+import com.hebin.testservice.entity.*;
+import com.hebin.testservice.feign.ResourseFeign;
 import com.hebin.testservice.feign.UserFeign;
-import com.hebin.testservice.service.StuTestChoiceService;
-import com.hebin.testservice.service.StuTestQaService;
-import com.hebin.testservice.service.TestEntityService;
+import com.hebin.testservice.service.*;
 import com.hebin.user.entity.StudentEntity;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -31,7 +30,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Api(tags = "教师操作接口")
 @RestController
@@ -45,6 +43,12 @@ public class TeaTestController {
     UserFeign userFeign;
     @Autowired
     TestEntityService testEntityService;
+    @Autowired
+    TestQaService testQaService;
+    @Autowired
+    TestChoiceService testChoiceService;
+    @Autowired
+    ResourseFeign resourseFeign;
     /*
      *自动批改
      */
@@ -170,4 +174,83 @@ public class TeaTestController {
     /*
     *   未来提供基于题目的视角的查看
     * */
+    /*
+    *   测试内新增试题
+    *   新增选择题
+    *   前端每次保存都会进行一次保存
+    *   保存的题目远程调用
+    * */
+    @ApiOperation("新建一个选择题")
+    @PostMapping("/createchoice")
+    public Resp<Object>  createChoice(@RequestBody CreateChoiceVO createChoiceVO)
+    {
+        //先要远程调用，保存到resource服务，并返回choiceId;
+        //然后就保存到edu_test_choice中即可
+        CreateChoiceDTO createChoiceDTO = new CreateChoiceDTO();
+        BeanUtils.copyProperties(createChoiceVO,createChoiceDTO);
+        String choiceId=resourseFeign.createChoice(createChoiceDTO);
+        TestChoiceEntity testChoiceEntity = new TestChoiceEntity();
+        BeanUtils.copyProperties(createChoiceVO,testChoiceEntity);
+        testChoiceEntity.setChoiceId(choiceId);
+        testChoiceService.save(testChoiceEntity);
+        return Resp.fail("创建失败");
+    }
+    /*
+    *
+    * 如果是删除一个选择题，那么只用将其在这个关系中的isDelete置为1即可
+    * 并且将一个只用删test_choice
+    * 被删除的可以在回收站中被查看到
+    *
+    * */
+    @ApiOperation("删除一个选择题")
+    @PostMapping("/deletechoice")
+    public Resp<Object>  deleteChoice(@RequestParam("testId") String testId,@RequestParam("choiceId") String choiceId)
+    {
+        //先要远程调用，保存到resource服务，并返回choiceId;
+        QueryWrapper<TestChoiceEntity> testChoiceEntityQueryWrapper = new QueryWrapper<>();
+        testChoiceEntityQueryWrapper.and(i->i.eq("test_id",testId).eq("choice_id",choiceId));
+        TestChoiceEntity testChoiceEntity = new TestChoiceEntity();
+        if(testChoiceService.remove(testChoiceEntityQueryWrapper))return Resp.ok("删除成功");
+        return Resp.fail("删除失败");
+    }
+    /*
+     *   测试内新增试题
+     *   新增选择题
+     *   前端每次保存都会进行一次保存
+     *   保存的题目远程调用
+     * */
+    @ApiOperation("新建一个简答")
+    @PostMapping("/createqa")
+    public Resp<Object>  createQa(@RequestBody CreateQaVO createQaVO)
+    {
+        //先要远程调用，保存到resource服务，并返回choiceId;
+        //然后就保存到edu_test_choice中即可
+        QuestionsAndAnswersEntity questionsAndAnswersEntity  = new QuestionsAndAnswersEntity();
+        BeanUtils.copyProperties(createQaVO,questionsAndAnswersEntity);
+        String qaId=resourseFeign.createQa(questionsAndAnswersEntity);
+        TestQaEntity testQaEntity = new TestQaEntity();
+        BeanUtils.copyProperties(createQaVO,testQaEntity);
+        testQaEntity.setQaId(qaId);
+        testQaEntity.setIsDelete(0);
+        testQaService.save(testQaEntity);
+        return Resp.fail("创建失败");
+    }
+    /*
+     *
+     * 如果是删除一个简答，那么只用将其在这个关系中的isDelete置为1即可
+     * 并且将一个只用删test_choice
+     * 被删除的可以在回收站中被查看到
+     *
+     * */
+    @ApiOperation("删除一个简答")
+    @PostMapping("/deleteQa")
+    public Resp<Object>  deleteQa(@RequestParam("testId") String testId,@RequestParam("qaId") String qaId)
+    {
+        //先要远程调用，保存到resource服务，并返回choiceId;
+        QueryWrapper<TestQaEntity> testQaEntityQueryWrapper = new QueryWrapper<>();
+        testQaEntityQueryWrapper.and(i->i.eq("test_id",testId).eq("qa_id",qaId));
+        if(testQaService.remove(testQaEntityQueryWrapper))return Resp.ok("删除成功");
+        return Resp.fail("删除失败");
+    }
+
 }

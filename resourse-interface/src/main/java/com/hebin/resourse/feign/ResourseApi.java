@@ -10,8 +10,10 @@ package com.hebin.resourse.feign;
 
 import com.hebin.core.bean.Resp;
 import com.hebin.resourse.DTO.ChoiceDTO;
+import com.hebin.resourse.DTO.CreateChoiceDTO;
 import com.hebin.resourse.DTO.QADTO;
 import com.hebin.resourse.entity.HomeworkEntity;
+import com.hebin.resourse.entity.QuestionsAndAnswersEntity;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
@@ -29,10 +31,17 @@ public interface ResourseApi {
 
     @ApiOperation("远程调用,获取具体的选择题")
     @PostMapping("resourse/choicedetaillist")
-    public List<ChoiceDTO> choice(@RequestBody List<ChoiceDTO> choiceDTOS);
+    public List<ChoiceDTO> choiceDetailList(@RequestBody List<ChoiceDTO> choiceDTOS);
 
     @ApiOperation("远程调用,获取具体的简答题信息")
     @PostMapping("resourse/qadetaillist")
-    public List<QADTO> qa(@RequestBody List<QADTO> qadtos);
+    public List<QADTO> qaDetailList(@RequestBody List<QADTO> qadtos);
 
+    @ApiOperation("远程调用,新增一个选择题")
+    @PostMapping("resourse/createchoice")
+    public String createChoice(@RequestBody CreateChoiceDTO createChoiceDTO);
+
+    @ApiOperation("远程调用,新增一个填空题")
+    @PostMapping("resourse/createqa")
+    public String createQa(@RequestBody QuestionsAndAnswersEntity questionsAndAnswersEntity);
 }
