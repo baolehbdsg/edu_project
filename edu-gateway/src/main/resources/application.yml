@@ -1,0 +1,41 @@
+server:
+  port: 8888
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.174.1:8848
+    gateway:
+      routes:
+        - id: bbs-route # bbs路由
+          uri: lb://bbs-service
+          predicates:
+            - Path=/bbs/**
+        - id: course-route # 课程路由
+          uri: lb://course-service
+          predicates:
+            - Path=/course/**
+        - id: lesson-route # 资源区路由
+          uri: lb://lesson-service
+          predicates:
+            - Path=/lesson/**
+        - id: resourse-route # 公共服务路径
+          uri: lb://resourse-service
+          predicates:
+            - Path=/resourse/**
+        - id: user-route # 用户微服务路径
+          uri: lb://user-service
+          predicates:
+            - Path=/user/**
+        - id: test-route # 用户微服务路径
+          uri: lb://test-service
+          predicates:
+            - Path=/test/**
+        - id: interactive-route # 用户微服务路径
+          uri: lb://interactive-service
+          predicates:
+            - Path=/interactive/**
+        - id: homework-route # 用户微服务路径
+          uri: lb://homework-service
+          predicates:
+            - Path=/homework/**

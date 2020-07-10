@@ -7,10 +7,7 @@
  */
 
 package com.hebin.bbs.controller;
-
 import java.util.Arrays;
-
-
 import com.hebin.bbs.DTO.CoursebbsDTO;
 import com.hebin.bbs.entity.BbsEntity;
 import com.hebin.bbs.entity.CourseBbsEntity;
@@ -25,8 +22,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import com.hebin.bbs.service.BbsService;
-
-
 /**
  * @author hebin
  * @email 649980884@@qq.com

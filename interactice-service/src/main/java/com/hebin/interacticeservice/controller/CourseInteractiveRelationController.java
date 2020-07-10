@@ -45,6 +45,9 @@ public class CourseInteractiveRelationController {
     @GetMapping("/interactiveList/{courseId}")
     @PreAuthorize("hasAuthority('course:courseinteractiverelation:list')")
     public Resp<PageVo> interactivelist(QueryCondition queryCondition,@PathVariable("courseId")String courseId) {
+        //根据不同权限，查看的视图不同
+        //如果是教师权限，可以查看到该课程下未发布的
+        //学生权限只能看到已经发布的互动信息
         QueryWrapper<CourseInteractiveRelationEntity> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("course_id",courseId);
         IPage<CourseInteractiveRelationEntity> page = new Query<CourseInteractiveRelationEntity>().getPage(queryCondition);

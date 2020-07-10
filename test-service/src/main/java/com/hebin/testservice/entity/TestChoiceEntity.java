@@ -54,4 +54,6 @@ public class TestChoiceEntity implements Serializable {
 	@TableLogic
 	@ApiModelProperty(name = "逻辑删除",value = "")
 	private Integer	isDelete;
+
+
 }

@@ -43,8 +43,14 @@ public class InteractiveChoiceEntity implements Serializable {
 	 * 
 	 */
 	@ApiModelProperty(name = "number",value = "")
+	private Integer choiceType;
+
+	@ApiModelProperty(name = "number",value = "")
 	private Integer number;
+
 	@TableLogic
 	@ApiModelProperty(name = "逻辑删除",value = "")
 	private Integer isDelete;
+
+
 }

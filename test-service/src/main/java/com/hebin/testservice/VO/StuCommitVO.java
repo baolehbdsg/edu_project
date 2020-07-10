@@ -34,7 +34,7 @@ public class StuCommitVO {
     /**
      *
      */
-    @ApiModelProperty(name = "stuInteractiveQaAnswer",value = "")
+    @ApiModelProperty(name = "stuTestQaAnswer",value = "")
     private String answer;
 
     @ApiModelProperty(name = "finishTime",value = "")
