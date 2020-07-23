@@ -8,25 +8,25 @@
 
 package com.hebin.lesson.controller;
 
-import java.util.Arrays;
 
-
-import com.hebin.core.bean.PageVo;
-import com.hebin.core.bean.QueryCondition;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.hebin.core.bean.Resp;
-import com.hebin.lesson.VO.LessonHomeworkVO;
-import com.hebin.lesson.entiry.TeacherHomeworkEntity;
+import com.hebin.lesson.DTO.ListHomeworkDTO;
+import com.hebin.lesson.VO.CreateHomeWorkVO;
+import com.hebin.lesson.entity.TeacherDir;
+import com.hebin.lesson.entity.TeacherHomeworkEntity;
+import com.hebin.lesson.feign.ResourseFeign;
+import com.hebin.lesson.service.TeacherDirService;
+import com.hebin.lesson.service.TeacherHomeworkService;
 import com.hebin.resourse.entity.HomeworkEntity;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import com.hebin.lesson.service.TeacherHomeworkService;
-
-
-
+import java.util.Date;
+import java.util.List;
 
 /**
  * 
@@ -41,76 +41,81 @@ import com.hebin.lesson.service.TeacherHomeworkService;
 public class TeacherHomeworkController {
     @Autowired
     private TeacherHomeworkService teacherHomeworkService;
-
+    @Autowired
+    ResourseFeign resourseFeign;
+    @Autowired
+    TeacherDirService teacherDirService;
     /**
-     * 查看当前教师的课程资源中的作业
+     * 在课程区创建作业
      */
-    @ApiOperation("分页查询(排序)")
-    @GetMapping("/list")
-    @PreAuthorize("hasAuthority('lesson:teacherhomework:list')")
-    public Resp<PageVo> list(QueryCondition queryCondition,@RequestParam("teacherId")String teacherId) {
-        PageVo page = teacherHomeworkService.queryPageById(queryCondition,teacherId);
-        return Resp.ok(page);
+    @ApiOperation("创建作业")
+    @PostMapping("/createhomework")
+    public Resp<Object> createHomeWork(@RequestBody CreateHomeWorkVO createHomeWorkVO) {
+        String userId = "245";
+        HomeworkEntity homeworkEntity = new HomeworkEntity();
+        TeacherHomeworkEntity teacherHomeworkEntity = new TeacherHomeworkEntity();
+        BeanUtils.copyProperties(createHomeWorkVO,homeworkEntity);
+        BeanUtils.copyProperties(createHomeWorkVO,teacherHomeworkEntity);
+        String homeworkId = resourseFeign.publishHomework(homeworkEntity);
+        System.out.println(homeworkId);
+        teacherHomeworkEntity.setUserId(userId);
+        teacherHomeworkEntity.setHomeworkId(homeworkId);
+        teacherHomeworkEntity.setIsDelete(0);
+        teacherHomeworkEntity.setCreateTime(new Date());
+       teacherHomeworkService.save(teacherHomeworkEntity);
+        return Resp.ok(homeworkId);
     }
-
-
-    /**
-     * 查看具体作业信息
-     */
-    @ApiOperation("查看具体作业信息")
-    @GetMapping("/info/{homeworkId}")
-    @PreAuthorize("hasAuthority('lesson:teacherhomework:info')")
-    public Resp<HomeworkEntity> info(@PathVariable("homeworkId") String homeworkId){
-		HomeworkEntity homework=teacherHomeworkService.getLessonHomeWorkDetail(homeworkId);
-        return Resp.ok(homework);
+    @ApiOperation("查看作业区")
+    @GetMapping("/listhomework")
+    public Resp<Object> listHomeWork(@RequestParam("fatherId")String fatherId) {
+        String userId = "245";
+        //步骤：1查询所有互动且父文件夹id为0的
+        //2.远程调用获取这些id的实体
+        //3.查询dir下的type=0的且父文件夹id为0的
+        //4.返回一个统一对象
+        ListHomeworkDTO listHomeworkDTO = new ListHomeworkDTO();
+        QueryWrapper<TeacherHomeworkEntity> queryWrapper = new QueryWrapper<>();
+        queryWrapper.and(i->i.eq("user_id",userId).eq("father_id",fatherId).ne("is_delete",1));
+        List<TeacherHomeworkEntity> teacherHomeworkEntities=teacherHomeworkService.list(queryWrapper);
+        String ids[] = new String[teacherHomeworkEntities.size()];
+        for(int i = 0;i<teacherHomeworkEntities.size();i++)
+        {
+            ids[i] = teacherHomeworkEntities.get(i).getHomeworkId();
+        }
+        //返回结果1
+        listHomeworkDTO.setHomeworkEntities(resourseFeign.listHomework(ids));
+       //返回结果2
+        QueryWrapper<TeacherDir> teacherDirQueryWrapper = new QueryWrapper<>();
+        teacherDirQueryWrapper.and(i->i.eq("user_id",userId).eq("father_dir_id",fatherId).eq("type",2));
+        listHomeworkDTO.setTeacherDirs(teacherDirService.list(teacherDirQueryWrapper));
+        return Resp.ok(listHomeworkDTO);
     }
-
-    /**
-     * 课程区创建作业，同时保存到备课区
-     */
-    @ApiOperation("课程区创建作业，同时保存到备课区")
-    @PostMapping("/save/homework")
-    @PreAuthorize("hasAuthority('lesson:teacherhomework:save')")
-    public void saveHomework(@RequestBody TeacherHomeworkEntity teacherHomework){
-
-		teacherHomeworkService.save(teacherHomework);
-
+    //
+    @ApiOperation("查看作业详情")
+    @GetMapping("/detailhomework")
+    public Resp<HomeworkEntity> detailHomeWork(@PathVariable("homeworkId") String homeworkId)
+    {
+        return resourseFeign.getHomeworkDetail(homeworkId);
     }
-
-    /**
-     * 通过课程区同时保存到备课区
-     */
-    @ApiOperation("通过备课区直接创建作业")
-    @PostMapping("/create/homework")
-    @PreAuthorize("hasAuthority('lesson:teacherhomework:save')")
-    public void createHomework(@RequestBody LessonHomeworkVO lessonHomeworkVO){
-
-        teacherHomeworkService.createHomework(lessonHomeworkVO);
-
-    }
-
-    /**
-     * 修改
-     */
-    @ApiOperation("修改")
+    @ApiOperation("修改作业")
     @PostMapping("/update")
-    @PreAuthorize("hasAuthority('lesson:teacherhomework:update')")
-    public Resp<Object> update(@RequestBody TeacherHomeworkEntity teacherHomework){
-		teacherHomeworkService.updateById(teacherHomework);
-
-        return Resp.ok(null);
+    public Resp<Object> updateHomeWork(@RequestBody HomeworkEntity homework)
+    {
+        return resourseFeign.update(homework);
+    }
+    @ApiOperation("删除作业")
+    @GetMapping("/update")
+    public Resp<Object> deleteHomeWork(@RequestParam("homeworkId") String homeworkId)
+    {
+        //直接删除这层关系即可
+        String userId = "245";
+        QueryWrapper<TeacherHomeworkEntity> queryWrapper = new QueryWrapper<>();
+        queryWrapper.and(i->i.eq("user_id",userId).eq("homework_id",homeworkId));
+        teacherHomeworkService.remove(queryWrapper);
+        return Resp.ok("删除成功");
     }
 
-    /**
-     * 删除
-     */
-    @ApiOperation("删除")
-    @PostMapping("/delete")
-    @PreAuthorize("hasAuthority('lesson:teacherhomework:delete')")
-    public Resp<Object> delete(@RequestBody Long[] ids){
-		teacherHomeworkService.removeByIds(Arrays.asList(ids));
-
-        return Resp.ok(null);
-    }
 
 }
+
+

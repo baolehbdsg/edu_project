@@ -15,3 +15,6 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: auto  # 默认使用数据库自增
+ribbon:
+  ReadTimeout: 30000
+  ConnectTimeout: 30000

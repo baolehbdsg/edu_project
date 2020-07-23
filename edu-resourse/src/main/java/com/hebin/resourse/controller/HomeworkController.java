@@ -1,8 +1,10 @@
 package com.hebin.resourse.controller;
 
 import java.util.Arrays;
+import java.util.List;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.hebin.core.bean.PageVo;
 import com.hebin.core.bean.QueryCondition;
 import com.hebin.core.bean.Resp;
@@ -43,7 +45,14 @@ public class HomeworkController {
 
         return Resp.ok(page);
     }
-
+    @ApiOperation("作业列表")
+    @GetMapping("/listhomework")
+    @PreAuthorize("hasAuthority('resourse:homework:list')")
+    public List<HomeworkEntity> listHomework(@RequestParam("ids") String [] ids) {
+        QueryWrapper<HomeworkEntity> queryWrapper = new QueryWrapper<>();
+        queryWrapper.in("homework_id",ids);
+        return  homeworkService.list(queryWrapper);
+    }
 
     /**
      * 信息
@@ -59,12 +68,12 @@ public class HomeworkController {
     /**
      * 发布作业
      */
-    @ApiOperation("发布作业")
+    @ApiOperation("新增作业")
     @PostMapping("/publish/homework")
     @PreAuthorize("hasAuthority('resourse:homework:save')")
-    public Resp<String> publishHomework(@RequestBody HomeworkEntity homework){
+    public String publishHomework(@RequestBody HomeworkEntity homework){
 
-        return Resp.ok(homeworkService.publishHomework(homework));
+        return homeworkService.publishHomework(homework);
 
     }
 

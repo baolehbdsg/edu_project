@@ -14,7 +14,7 @@ import com.hebin.homeworkservice.entity.CourseHomeworkEntity;
 import com.hebin.homeworkservice.feign.Lessonfeign;
 import com.hebin.homeworkservice.feign.Resoursefeign;
 import com.hebin.homeworkservice.service.CourseHomeworkService;
-import com.hebin.lesson.entiry.TeacherHomeworkEntity;
+import com.hebin.lesson.entity.TeacherHomeworkEntity;
 import com.hebin.resourse.entity.HomeworkEntity;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +57,7 @@ public class CourseHomeworkServiceImpl extends ServiceImpl<CourseHomeworkDao, Co
 
         HomeworkEntity homework = new HomeworkEntity();
         BeanUtils.copyProperties(homeworkVO,homework);
-        String homeworkId = resoursefeign.publishHomework(homework).getData();
+        String homeworkId = resoursefeign.publishHomework(homework);
         //这两个保存可以用多线程执行的
         //保存到CourseHomework
         CourseHomeworkEntity courseHomeworkEntity = new CourseHomeworkEntity();

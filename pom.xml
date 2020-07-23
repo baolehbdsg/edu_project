@@ -15,5 +15,7 @@
         <module>resourse-interface</module>
         <module>lesson-interface</module>
         <module>user-interface</module>
+        <module>interactive-interface</module>
+        <module>test-interface</module>
     </modules>
 </project>

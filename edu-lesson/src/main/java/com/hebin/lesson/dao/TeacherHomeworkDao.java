@@ -9,7 +9,7 @@
 package com.hebin.lesson.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.hebin.lesson.entiry.TeacherHomeworkEntity;
+import com.hebin.lesson.entity.TeacherHomeworkEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

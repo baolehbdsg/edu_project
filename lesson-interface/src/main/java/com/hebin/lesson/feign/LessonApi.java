@@ -8,9 +8,9 @@
 
 package com.hebin.lesson.feign;
 
-import com.hebin.lesson.entiry.TeacherHomeworkEntity;
+//import com.hebin.lesson.entity.TeacherHomeworkEntity;
+import com.hebin.lesson.entity.TeacherHomeworkEntity;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 

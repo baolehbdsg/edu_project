@@ -56,9 +56,9 @@ public class TestEntityController {
      * 测试状态：未测试
      */
     @ApiOperation("修改测试标题,或内容")
-    @PostMapping("/updatetesttitle")
+    @PostMapping("/updatetest")
     @PreAuthorize("hasAuthority('resourse:testentity:update')")
-    public Resp<Object> updatetesttitle(@RequestBody TestEntityEntity testEntity){
+    public Resp<Object> updateTest(@RequestBody TestEntityEntity testEntity){
 		if(testEntityService.updateById(testEntity))
             return Resp.ok("修改成功");
 		else return Resp.ok("修改失败");

@@ -11,7 +11,8 @@ package com.hebin.lesson.VO;
 import com.hebin.resourse.entity.HomeworkEntity;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class LessonHomeworkVO extends HomeworkEntity {
-    private String userId;
+public class LessonHomeworkVO extends HomeworkEntity implements Serializable {
 }

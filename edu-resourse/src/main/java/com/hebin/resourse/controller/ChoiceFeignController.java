@@ -96,7 +96,13 @@ public class ChoiceFeignController {
         {
             SingleChoiceEntity singleChoiceEntity = new SingleChoiceEntity();
             BeanUtils.copyProperties(createChoiceDTO,singleChoiceEntity);
-            singleChoiceService.save(singleChoiceEntity);
+            if(singleChoiceEntity.getChoiceId()==null||singleChoiceEntity.getChoiceId()=="") singleChoiceService.save(singleChoiceEntity);
+            else
+            {
+                QueryWrapper<SingleChoiceEntity> queryWrapper = new QueryWrapper<>();
+                queryWrapper.eq("choice_id",singleChoiceEntity.getChoiceId());
+                singleChoiceService.update(singleChoiceEntity,queryWrapper);
+            }
             return singleChoiceEntity.getChoiceId();
         }
         //多选

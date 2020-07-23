@@ -9,6 +9,7 @@
 package com.hebin.resourse.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.hebin.resourse.DTO.ChoiceDTO;
 import com.hebin.resourse.DTO.QADTO;
 import com.hebin.resourse.entity.QuestionsAndAnswersEntity;
@@ -42,12 +43,21 @@ public class QAFeignController {
         }
         return qadtos;
     }
-    @ApiOperation("远程调用,新增一个填空题")
+    @ApiOperation("远程调用,新增/修改一个填空题")
     @PostMapping("resourse/createqa")
     @PreAuthorize("hasAuthority('resourse:homework:list')")
     public String createQa(@RequestBody QuestionsAndAnswersEntity questionsAndAnswersEntity)
     {
-        questionsAndAnswersService.save(questionsAndAnswersEntity);
-        return questionsAndAnswersEntity.getQaId();
+        if(questionsAndAnswersEntity.getQaId()==null||questionsAndAnswersEntity.getQaId()=="") {
+            questionsAndAnswersService.save(questionsAndAnswersEntity);
+            return questionsAndAnswersEntity.getQaId();
+        }
+        else
+        {
+            QueryWrapper<QuestionsAndAnswersEntity> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("qa_id",questionsAndAnswersEntity.getQaId());
+            questionsAndAnswersService.update(questionsAndAnswersEntity,queryWrapper);
+            return questionsAndAnswersEntity.getQaId();
+        }
     }
 }

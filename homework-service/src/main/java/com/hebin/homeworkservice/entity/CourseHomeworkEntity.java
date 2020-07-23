@@ -54,4 +54,17 @@ public class CourseHomeworkEntity implements Serializable {
 	@ApiModelProperty(name = "canDelay",value = "")
 	private Integer canDelay;
 
+	@ApiModelProperty(name = "Type",value = "")
+	private Integer type;
+
+	@ApiModelProperty(name = "Type",value = "")
+	private Integer isPublish;
+
+	@ApiModelProperty(name = "max_group_size",value = "")
+	private String maxGroupSize;
+
+	@ApiModelProperty(name = "group_limit_time",value = "")
+	private String groupLimitTime;
+
+
 }

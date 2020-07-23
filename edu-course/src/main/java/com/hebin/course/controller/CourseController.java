@@ -92,7 +92,6 @@ public class CourseController {
 
         return Resp.ok("修改成功");
     }
-
     /**
      * 删除
      */

@@ -9,10 +9,10 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.hebin.interacticeservice.dao.CourseInteractiveRelationDao">
+<mapper namespace="com.hebin.interactiveservice.dao.CourseInteractiveRelationDao">
 
 	<!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="com.hebin.interacticeservice.entity.CourseInteractiveRelationEntity" id="courseInteractiveRelationMap">
+    <resultMap type="com.hebin.interactiveservice.entity.CourseInteractiveRelationEntity" id="courseInteractiveRelationMap">
         <result property="id" column="id"/>
         <result property="courseId" column="course_id"/>
         <result property="interactiveId" column="interactive_id"/>

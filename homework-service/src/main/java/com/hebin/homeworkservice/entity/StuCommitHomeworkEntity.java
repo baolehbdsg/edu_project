@@ -31,7 +31,6 @@ import java.util.Date;
 @TableName("edu_stu_commit_homework")
 public class StuCommitHomeworkEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
-
 	/**
 	 * 
 	 */

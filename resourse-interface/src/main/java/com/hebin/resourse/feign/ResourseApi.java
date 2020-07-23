@@ -21,9 +21,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 public interface ResourseApi {
-    @ApiOperation("发布作业")
+    @ApiOperation("创建作业")
     @PostMapping("resourse/homework/publish/homework")
-    public Resp<String> publishHomework(@RequestBody HomeworkEntity homework);
+    public String publishHomework(@RequestBody HomeworkEntity homework);
 
     @ApiOperation("作业详情查询")
     @GetMapping("resourse/homework/gethomeworkdetail/{homeworkId}")
@@ -37,11 +37,21 @@ public interface ResourseApi {
     @PostMapping("resourse/qadetaillist")
     public List<QADTO> qaDetailList(@RequestBody List<QADTO> qadtos);
 
-    @ApiOperation("远程调用,新增一个选择题")
+    @ApiOperation("远程调用,新增/修改一个选择题")
     @PostMapping("resourse/createchoice")
     public String createChoice(@RequestBody CreateChoiceDTO createChoiceDTO);
 
     @ApiOperation("远程调用,新增一个填空题")
     @PostMapping("resourse/createqa")
     public String createQa(@RequestBody QuestionsAndAnswersEntity questionsAndAnswersEntity);
+
+    @ApiOperation("作业列表")
+    @GetMapping("/listhomework")
+    public List<HomeworkEntity> listHomework(@RequestParam("ids") String [] ids);
+
+    @ApiOperation("修改")
+    @PostMapping("/update")
+    public Resp<Object> update(@RequestBody HomeworkEntity homework);
+
+
 }

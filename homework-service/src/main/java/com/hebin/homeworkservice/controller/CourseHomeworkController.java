@@ -1,5 +1,6 @@
 package com.hebin.homeworkservice.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.hebin.core.bean.PageVo;
 import com.hebin.core.bean.QueryCondition;
 import com.hebin.core.bean.Resp;
@@ -8,9 +9,12 @@ import com.hebin.homeworkservice.DTO.HomeworkDetailDTO;
 import com.hebin.homeworkservice.VO.HomeworkVO;
 import com.hebin.homeworkservice.VO.ImportHomeworkVO;
 import com.hebin.homeworkservice.entity.CourseHomeworkEntity;
+import com.hebin.homeworkservice.feign.Resoursefeign;
 import com.hebin.homeworkservice.service.CourseHomeworkService;
+import com.hebin.resourse.entity.HomeworkEntity;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +35,8 @@ import java.util.Arrays;
 public class CourseHomeworkController {
     @Autowired
     private CourseHomeworkService courseHomeworkService;
+    @Autowired
+    private Resoursefeign resoursefeign;
     /**
      * 权限：教师，学生
      * 获取课程作业列表
@@ -58,17 +64,38 @@ public class CourseHomeworkController {
     }
     /**
      * 权限：教师
-     * 发布作业
+     * 发布作业,小组或个人都可以
      * 直接发布
      */
-    @ApiOperation("发布作业")
+    @ApiOperation("创建作业")
     @PostMapping("/create/coursehomework")
-    @PreAuthorize("hasAuthority('course:coursehomework:save')")
     public Resp<Object> createCourseHomework(@RequestBody HomeworkVO homeworkVO){
-
-		courseHomeworkService.createCourseHomework(homeworkVO);
-
-        return Resp.ok(null);
+        //0代表个人作业
+        //1代表固定小组作业
+        //2代表灵活定制的小组作业
+        //分别要保存的表：
+        //course_homework
+        //远程homework表中
+//		courseHomeworkService.createCourseHomework(homeworkVO);
+        HomeworkEntity homeworkEntity = new HomeworkEntity();
+        BeanUtils.copyProperties(homeworkVO,homeworkEntity);
+        String homeworkId=resoursefeign.publishHomework(homeworkEntity);
+        CourseHomeworkEntity courseHomeworkEntity = new CourseHomeworkEntity();
+        BeanUtils.copyProperties(homeworkVO,courseHomeworkEntity);
+        courseHomeworkEntity.setHomeworkId(homeworkId);
+        courseHomeworkService.save(courseHomeworkEntity);
+        return Resp.ok("创建成功");
+    }
+    @ApiOperation("发布作业")
+    @PostMapping("/publish/coursehomework")
+    public Resp<Object> publishCourseHomework(@RequestParam("homeworkId")String homeworkId){
+//		courseHomeworkService.createCourseHomework(homeworkVO);
+        QueryWrapper<CourseHomeworkEntity> courseHomeworkEntityQueryWrapper = new QueryWrapper<>();
+        courseHomeworkEntityQueryWrapper.eq("homework_id",homeworkId);
+        CourseHomeworkEntity  courseHomeworkEntity = new CourseHomeworkEntity();
+        courseHomeworkEntity.setIsPublish(1);
+        courseHomeworkService.update(courseHomeworkEntity,courseHomeworkEntityQueryWrapper);
+        return Resp.ok("创建成功");
     }
     /**
      * 从备课区引入作业

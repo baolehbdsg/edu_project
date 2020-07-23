@@ -8,8 +8,7 @@
 
 package com.hebin.lesson.entity;
 
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
@@ -32,7 +31,7 @@ public class TeacherInteractiveEntity implements Serializable {
 	/**
 	 * 
 	 */
-	@TableId
+	@TableId(type = IdType.AUTO)
 	@ApiModelProperty(name = "id",value = "")
 	private Long id;
 	/**
@@ -45,5 +44,13 @@ public class TeacherInteractiveEntity implements Serializable {
 	 */
 	@ApiModelProperty(name = "interactiveId",value = "")
 	private String interactiveId;
+
+	@TableField(fill = FieldFill.INSERT)
+	private Date createTime;
+
+	private String fatherId;
+
+	@TableLogic
+	private Integer isDelete;
 
 }

@@ -1,5 +1,5 @@
 server:
-  port: 8001
+  port: 8099
 spring:
   cloud:
     nacos:
@@ -15,3 +15,6 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: ID_WORKER_STR  # 默认使用数据库自增application.yml
+ribbon:
+  ReadTimeout: 30000
+  ConnectTimeout: 30000
